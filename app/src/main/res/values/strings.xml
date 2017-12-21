@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Liberarymanege</string>
+    <string name="log_name">图书管理系统</string>
 </resources>
