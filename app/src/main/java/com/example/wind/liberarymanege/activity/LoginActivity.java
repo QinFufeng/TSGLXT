@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity{
                 String [] a=new String[]{"username","userpassword"};
                 String [] b=new String[]{name,pwd};
                 int cc=dbUtil.Login(a,b);
+                //DialogUIUtils.showMdLoadingHorizontal(this, "加载中...").show();
                 //Toast.makeText(LoginActivity.this, cc, Toast.LENGTH_SHORT).show();
                 if(cc==0){
                     Intent intent=new Intent(LoginActivity.this,MainActivity.class);

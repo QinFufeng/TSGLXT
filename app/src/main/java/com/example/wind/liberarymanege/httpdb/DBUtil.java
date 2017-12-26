@@ -11,12 +11,15 @@ public class DBUtil {
         //boolean cc=false;
         int c=2;
         httpConnSoap=new HttpConnSoap();
-        String es=httpConnSoap.HttpGo(par1,par2,"IsMatchUser");
-        if(es.equals("true"))
+        //String[] es=httpConnSoap.HttpGo(par1,par2,"IsMatchUser");
+        String[] es=new String[]{""};
+        es=httpConnSoap.HttpGo(par1,par2,"IsMatchUser");
+        //String es=se.getProperty(0).toString();
+        if(es[0].equals("0"))
         {
             //Toast.makeText(LoginActivity.class, "用户名或密码错误！", Toast.LENGTH_SHORT).show();
             c=0;
-        }else if(es.equals("false")){
+        }else if(es[0].equals("1")){
             c=1;
         }
         //cc=Boolean.parseBoolean(es);

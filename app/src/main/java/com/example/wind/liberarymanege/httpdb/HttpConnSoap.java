@@ -19,15 +19,16 @@ import java.io.IOException;
 public class HttpConnSoap {
     //访问网络同时加入这个
     @SuppressLint("NewApi")
-    public String HttpGo(String[] par1,String[] par2,String way){
+    public String[] HttpGo(String[] par1,String[] par2,String way){
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         String namespace="http://tempuri.org/";//namespace
         String soapAction = "http://tempuri.org//"+way+"/";
-        String url = "http://192.168.123.112/WebService1.asmx";
-        String cc="错误！";
+        String url = "http://192.168.1.120/WebService1.asmx";
+        String[] cc;
+        //String cc="asd";
 
-        String methodName=way;
+        String methodName=way;//要调用的方法名称
         SoapObject re=new SoapObject(namespace,methodName);
         for(int i=0;i<par1.length;i++){
             re.addProperty(par1[i],par2[i]);
@@ -37,26 +38,33 @@ public class HttpConnSoap {
         env.bodyOut=re;
         env.dotNet=true;
         (new MarshalBase64()).register(env);
-        env.setOutputSoapObject(re);
+        //env.setOutputSoapObject(re);
         HttpTransportSE transport=new HttpTransportSE(url);
         transport.debug=true;
         try {
             transport.call(soapAction,env);
 
-            //SoapObject primitive =  (SoapObject) env.getResponse();
+            SoapObject primitive =  (SoapObject) env.getResponse();
+            int cont=primitive.getPropertyCount();
+            cc=new String[cont];
+            for(int i=0;i<cont;i++)
+            {
+                cc[i]=primitive.getProperty(i).toString();
+            }
 
+            //primitive= (SoapObject) env.getResponse();
             //cc=primitive.getProperty(0).toString();
             //int i=primitive.getPropertyCount();
             //cc=""+i;
             //cc=ss[0];
 
-            cc=String.valueOf(env.getResponse());
+            //cc=String.valueOf(env.getResponse());
             return cc;
         } catch (IOException e) {
             e.printStackTrace();
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         }
-        return cc;
+        return cc=new String[]{"错误！"};
     }
 }
