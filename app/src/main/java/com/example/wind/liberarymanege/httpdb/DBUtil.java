@@ -25,4 +25,22 @@ public class DBUtil {
         //cc=Boolean.parseBoolean(es);
         return c;
     }
+    public int Register(String[] par1,String[] par2){
+        int c=3;
+        httpConnSoap=new HttpConnSoap();
+        String[] es=new String[]{""};
+        es=httpConnSoap.HttpGo(par1,par2,"IsRegister");
+        if(es[0].equals("0"))
+        {
+            c=0;
+        }
+        else if(es[0].equals("1")){
+            c=1;
+        }
+        else if(es[0].equals("2")){
+            c=2;
+        }
+        //cc=Boolean.parseBoolean(es);
+        return c;
+    }
 }

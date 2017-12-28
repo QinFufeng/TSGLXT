@@ -93,7 +93,8 @@ public final class RegExpValidatorUtils {
      * @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
      */
     public static boolean IsHandset(String str) {
-        String regex = "^[1]+[3,5]+\\d{9}$";
+        //String regex = "^[1]+[3,5]+\\d{9}$";
+        String regex = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$";
         return match(regex, str);
     }
 
