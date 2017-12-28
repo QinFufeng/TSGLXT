@@ -53,8 +53,17 @@ public class LoginActivity extends AppCompatActivity{
 
             }
         });
+        /*register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2=new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent2) ;
+            }
+        });*/
     }
 
     public void reg(View view) {
+        Intent intent2=new Intent(LoginActivity.this,RegisterActivity.class);
+        startActivity(intent2) ;
     }
 }
