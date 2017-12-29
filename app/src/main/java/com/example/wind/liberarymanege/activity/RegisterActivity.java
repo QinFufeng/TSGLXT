@@ -1,6 +1,8 @@
 package com.example.wind.liberarymanege.activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -74,15 +76,43 @@ public class RegisterActivity extends AppCompatActivity {
         if(c==0){
             //Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
             //startActivity(intent) ;
-            Toast.makeText(RegisterActivity.this,"注册成功！", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(RegisterActivity.this,"注册成功！", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setTitle("提示")
+                    .setMessage("注册成功！")
+                    .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //commit();
+                            RegisterActivity.this.finish();
+                        }
+                    });
+            builder.create().show();
         }
         else if(c==1){
             Toast.makeText(RegisterActivity.this,"注册失败！", Toast.LENGTH_SHORT).show();
         }
         else if(c==2){
-            Toast.makeText(RegisterActivity.this,"该用户名已存在", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(RegisterActivity.this,"该用户名已存在", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setTitle("提示")
+                    .setMessage("该用户名已存在！")
+                    .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //commit();
+                            RegisterActivity.this.finish();
+                        }
+                    }).setNegativeButton("取消", null);
+            builder.create().show();
         }
-        else
-            Toast.makeText(RegisterActivity.this,"网络连接错误！", Toast.LENGTH_SHORT).show();
+        else {
+            //Toast.makeText(RegisterActivity.this, "网络连接错误！", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setTitle("提示")
+                    .setMessage("网络连接错误！")
+                    .setPositiveButton("确认", null);
+            builder.create().show();
+        }
     }
 }
