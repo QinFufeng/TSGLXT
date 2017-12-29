@@ -88,6 +88,7 @@
             android:orientation="vertical"
             android:layout_weight="9">
             <TextView
+                android:onClick="findClick"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="查找图书"
@@ -101,6 +102,7 @@
             android:layout_weight="9"
             >
             <TextView
+                android:onClick="userClick"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="个人中心"

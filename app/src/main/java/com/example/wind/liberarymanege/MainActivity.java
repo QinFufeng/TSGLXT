@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout main1,type1,find1,user1;
@@ -20,7 +19,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void mainClick(View view) {
-        Toast.makeText(MainActivity.this,"点击main", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,"点击main", Toast.LENGTH_SHORT).show();
+        main1.setVisibility(View.VISIBLE);
+        type1.setVisibility(View.GONE);
+        find1.setVisibility(View.GONE);
+        user1.setVisibility(View.GONE);
     }
 
     public void typeClick(View view) {
@@ -28,5 +31,19 @@ public class MainActivity extends AppCompatActivity {
         type1.setVisibility(View.VISIBLE);
         find1.setVisibility(View.GONE);
         user1.setVisibility(View.GONE);
+    }
+
+    public void findClick(View view) {
+        main1.setVisibility(View.GONE);
+        type1.setVisibility(View.GONE);
+        find1.setVisibility(View.VISIBLE);
+        user1.setVisibility(View.GONE);
+    }
+
+    public void userClick(View view) {
+        main1.setVisibility(View.GONE);
+        type1.setVisibility(View.GONE);
+        find1.setVisibility(View.GONE);
+        user1.setVisibility(View.VISIBLE);
     }
 }
