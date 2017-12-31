@@ -58,12 +58,23 @@ public class LoginActivity extends AppCompatActivity{
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loading.setVisibility(View.VISIBLE);
-                main.setVisibility(View.GONE);
                 String name=username.getText().toString();
                 String pwd=password.getText().toString();
+
+                if(name.equals("")){
+                    Toast.makeText(LoginActivity.this,"请输入用户名！", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 final String [] a=new String[]{"username","userpassword"};
                 final String [] b=new String[]{name,pwd};
+
+                loading.setVisibility(View.VISIBLE);
+                //main.setVisibility(View.GONE);
+                username.setEnabled(false);
+                password.setEnabled(false);
+                register.setEnabled(false);
+                login.setEnabled(false);
 
 
 
@@ -101,21 +112,25 @@ public class LoginActivity extends AppCompatActivity{
         //DialogUIUtils.showMdLoadingHorizontal(this, "加载中...").show();
         //Toast.makeText(LoginActivity.this, cc, Toast.LENGTH_SHORT).show();
         if(cc==0){
-            loading.setVisibility(View.GONE);
-            main.setVisibility(View.VISIBLE);
             Intent intent=new Intent(LoginActivity.this,MainActivity.class);
             startActivity(intent) ;
             LoginActivity.this.finish();
         }
         else if(cc==1){
-            loading.setVisibility(View.GONE);
-            main.setVisibility(View.VISIBLE);
             Toast.makeText(LoginActivity.this,"用户名或密码错误！", Toast.LENGTH_SHORT).show();
+            showControl();
         }
         else{
-            loading.setVisibility(View.GONE);
-            main.setVisibility(View.VISIBLE);
             Toast.makeText(LoginActivity.this,"网络连接错误！", Toast.LENGTH_SHORT).show();
+            showControl();
         }
+    }
+    public void showControl(){
+        loading.setVisibility(View.GONE);
+        //main.setVisibility(View.GONE);
+        username.setEnabled(true);
+        password.setEnabled(true);
+        register.setEnabled(true);
+        login.setEnabled(true);
     }
 }

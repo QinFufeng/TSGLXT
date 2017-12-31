@@ -2,11 +2,17 @@ package com.example.wind.liberarymanege.activity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wind.liberarymanege.R;
@@ -22,6 +28,25 @@ public class RegisterActivity extends AppCompatActivity {
     private RadioButton rman,rwonman;
     private RegExpValidatorUtils regExpValidatorUtils;
     private DBUtil dbUtil;
+    private Button bt1,bt2;
+    private LinearLayout layoutLoad;
+    private ProgressBar pro;
+    private TextView tv;
+    final int[] dd = new int[1];
+
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch(msg.what){
+                case 1:gosub();break;
+                //Toast.makeText(MainActivity.this, "连接服务器失败", Toast.LENGTH_LONG).show();
+
+                default:Toast.makeText(RegisterActivity.this, "程序出错！", Toast.LENGTH_LONG).show();
+                    break;
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +59,11 @@ public class RegisterActivity extends AppCompatActivity {
         teameil= (EditText) findViewById(R.id.temail);
         rman= (RadioButton) findViewById(R.id.rb_man);
         rwonman= (RadioButton) findViewById(R.id.rb_wnam);
+        bt1= (Button) findViewById(R.id.bn_reset);
+        bt2= (Button) findViewById(R.id.bn_sub);
+        layoutLoad= (LinearLayout) findViewById(R.id.layout_loading1);
+        pro= (ProgressBar) findViewById(R.id.load_dialog1);
+        tv= (TextView) findViewById(R.id.tv_load1);
         regExpValidatorUtils=new RegExpValidatorUtils();
         dbUtil=new DBUtil();
 
@@ -70,9 +100,36 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(RegisterActivity.this,"邮箱有误", Toast.LENGTH_SHORT).show();
             return;
         }
-        String[] a=new String[]{"username","userpassword","sex","phone","email"};
-        String[] b=new String[]{name,pwd,sex,phone,eamil};
-        int c= dbUtil.Register(a,b);
+        final String[] a=new String[]{"username","userpassword","sex","phone","email"};
+        final String[] b=new String[]{name,pwd,sex,phone,eamil};
+
+        tname.setEnabled(false);
+        tpwd.setEnabled(false);
+        trpwd.setEnabled(false);
+        tphone.setEnabled(false);
+        teameil.setEnabled(false);
+        rman.setEnabled(false);
+        rwonman.setEnabled(false);
+        bt1.setEnabled(false);
+        bt2.setEnabled(false);
+        layoutLoad.setVisibility(View.VISIBLE);
+
+        new Thread(){
+            @Override
+            public void run() {
+
+                dd[0] =dbUtil.Register(a,b);
+                Message msg = new Message();
+                msg.what = 1;
+                handler.sendMessage(msg);
+
+            }
+        }.start();
+
+    }
+    private void gosub(){
+        int c= dd[0];
+
         if(c==0){
             //Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
             //startActivity(intent) ;
@@ -88,9 +145,11 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     });
             builder.create().show();
+            setEnB();
         }
         else if(c==1){
             Toast.makeText(RegisterActivity.this,"注册失败！", Toast.LENGTH_SHORT).show();
+            setEnB();
         }
         else if(c==2){
             //Toast.makeText(RegisterActivity.this,"该用户名已存在", Toast.LENGTH_SHORT).show();
@@ -105,6 +164,7 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }).setNegativeButton("取消", null);
             builder.create().show();
+            setEnB();
         }
         else {
             //Toast.makeText(RegisterActivity.this, "网络连接错误！", Toast.LENGTH_SHORT).show();
@@ -113,6 +173,19 @@ public class RegisterActivity extends AppCompatActivity {
                     .setMessage("网络连接错误！")
                     .setPositiveButton("确认", null);
             builder.create().show();
+            setEnB();
         }
+    }
+    private void setEnB(){
+        tname.setEnabled(true);
+        tpwd.setEnabled(true);
+        trpwd.setEnabled(true);
+        tphone.setEnabled(true);
+        teameil.setEnabled(true);
+        rman.setEnabled(true);
+        rwonman.setEnabled(true);
+        bt1.setEnabled(true);
+        bt2.setEnabled(true);
+        layoutLoad.setVisibility(View.GONE);
     }
 }

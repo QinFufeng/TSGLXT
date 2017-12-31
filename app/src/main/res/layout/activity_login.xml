@@ -4,29 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@mipmap/login_background">
-    <LinearLayout
-android:visibility="gone"
-        android:orientation="vertical"
-        android:id="@+id/layout_loading"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        >
-        <ProgressBar
-            android:id="@+id/load_dialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-        <TextView
-            android:id="@+id/tv_load"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="登陆中..."
-            android:textColor="#000"
-            android:textSize="18sp"
-            android:gravity="center_horizontal"/>
-    </LinearLayout>
+
 <LinearLayout
     android:id="@+id/mainS"
     android:layout_width="match_parent"
@@ -121,33 +99,67 @@ android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_weight="2">
 
-            <Button
-                android:id="@+id/bn_register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:onClick="reg"
-                android:text="注册" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/bn_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="reg"
+                    android:text="注册" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/bn_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="登陆" />
+            </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
+android:visibility="gone"
+            android:id="@+id/layout_loading"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/bn_login"
+            <ProgressBar
+                android:id="@+id/load_dialog"
+                android:layout_gravity="center"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_load"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="登陆" />
+                android:gravity="center_horizontal"
+                android:text="登陆中..."
+                android:textColor="#000"
+                android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
