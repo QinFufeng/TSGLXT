@@ -25,7 +25,7 @@ public class HttpConnSoap {
         StrictMode.setThreadPolicy(policy);
         String namespace="http://tempuri.org/";//namespace
         String soapAction = "http://tempuri.org//"+way+"/";
-        String url = "http://192.168.123.126/WebService1.asmx";
+        String url = "http://192.168.123.106/WebService1.asmx";
         String[] cc;
         //String cc="asd";
 
