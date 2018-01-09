@@ -43,4 +43,10 @@ public class DBUtil {
         //cc=Boolean.parseBoolean(es);
         return c;
     }
+
+    public String UserImage(String[] par1, String[] par2) {
+        httpConnSoap=new HttpConnSoap();
+        String[] es=httpConnSoap.HttpGo(par1,par2,"IsShowUser");
+        return es[6];
+    }
 }

@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity{
     private TextView tload;
     private ProgressBar pro;
     private DBUtil dbUtil;
+    private String NAME;
     final int[] dd = new int[1];
     Handler handler = new Handler(){
         @Override
@@ -59,6 +60,7 @@ public class LoginActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 String name=username.getText().toString();
+                NAME=name;
                 String pwd=password.getText().toString();
 
                 if(name.equals("")){
@@ -113,6 +115,7 @@ public class LoginActivity extends AppCompatActivity{
         //Toast.makeText(LoginActivity.this, cc, Toast.LENGTH_SHORT).show();
         if(cc==0){
             Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+            intent.putExtra("name",NAME);
             startActivity(intent) ;
             LoginActivity.this.finish();
         }
