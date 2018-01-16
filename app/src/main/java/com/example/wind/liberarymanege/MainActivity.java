@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.wind.liberarymanege.activity.UpdatePwdActivity;
+import com.example.wind.liberarymanege.activity.UpdateUserActivity;
 import com.example.wind.liberarymanege.httpdb.DBUtil;
 
 public class MainActivity extends AppCompatActivity {
@@ -114,12 +116,24 @@ public class MainActivity extends AppCompatActivity {
         Imeu4.setBackgroundColor(MainActivity.this.getResources().getColor(R.color.bg1));
     }
     private void goImage(){
-        Test t=new Test();
-        Bitmap d=t.stringToBitmap1(dd[0]);
+        //Test t=new Test();
+        DBUtil dbU=new DBUtil();
+        Bitmap d=dbU.stringToBitmap1(dd[0]);
 
             ivuser.setImageBitmap(d);
 
         //tvUsername.setText(s);
     }
 
+    public void updatepwd(View view) {
+        Intent intent=new Intent(MainActivity.this,UpdatePwdActivity.class);
+        intent.putExtra("name",NAME);
+        startActivity(intent) ;
+    }
+
+    public void updateuseronClick(View view) {
+        Intent intent=new Intent(MainActivity.this,UpdateUserActivity.class);
+        intent.putExtra("name",NAME);
+        startActivity(intent) ;
+    }
 }
