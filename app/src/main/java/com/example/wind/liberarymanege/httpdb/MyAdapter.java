@@ -62,11 +62,14 @@ public class MyAdapter extends BaseAdapter {
             vh.iv1=(ImageView) convertView.findViewById(R.id.BImg);
             vh.tv11=(TextView)convertView.findViewById(R.id.BName);
             vh.tv12=(TextView)convertView.findViewById(R.id.BAuthor);
+            vh.tv13=(TextView)convertView.findViewById(R.id.BPice);
 
             vh.L2= (LinearLayout) convertView.findViewById(R.id.Llist2);
+
             vh.iv2=(ImageView) convertView.findViewById(R.id.BImg2);
             vh.tv21=(TextView)convertView.findViewById(R.id.BName2);
             vh.tv22=(TextView)convertView.findViewById(R.id.BAuthor2);
+            vh.tv23=(TextView)convertView.findViewById(R.id.BPice2);
 
             convertView.setTag(vh);
         }else {
@@ -81,6 +84,7 @@ public class MyAdapter extends BaseAdapter {
             vh.iv1.setImageBitmap((Bitmap) map.get("BImg"));
             vh.tv11.setText(map.get("BName").toString());
             vh.tv12.setText(map.get("BAuthor").toString());
+            vh.tv13.setText(map.get("BPice").toString());
             vh.tv11.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -93,7 +97,8 @@ public class MyAdapter extends BaseAdapter {
                 vh.iv2.setImageBitmap((Bitmap) map2.get("BImg"));
                 vh.tv21.setText(map2.get("BName").toString());
                 vh.tv22.setText(map2.get("BAuthor").toString());
-                //vh.tv21.setText(itemList.get(1).toString());
+                vh.tv23.setText(map2.get("BPice").toString());
+
                 vh.tv21.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -120,10 +125,12 @@ public class MyAdapter extends BaseAdapter {
         ImageView iv1;
         TextView tv11;
         TextView tv12;
+        TextView tv13;
 
         ImageView iv2;
         TextView tv21;
         TextView tv22;
+        TextView tv23;
         LinearLayout L2;
 
     }

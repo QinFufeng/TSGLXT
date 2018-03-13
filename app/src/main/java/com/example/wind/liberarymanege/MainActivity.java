@@ -116,13 +116,14 @@ public class MainActivity extends AppCompatActivity {
 
         DBUtil dbU=new DBUtil();
         Bitmap d=dbU.stringToBitmap1(dd[0]);
-        for(int i=0;i<9;i++){
+        for(int i=0;i<11;i++){
 
             if(i!=0){map=new HashMap<String,Object>();}
 
             map.put("BImg",d);
-            map.put("BName","shushushu"+i);
-            map.put("BAuthor","zuozhe"+i);
+            map.put("BName","我的书"+i);
+            map.put("BAuthor","啊发"+i);
+            map.put("BPice",i+"元");
 
             /*if(((i+1)*2-1)!=z) {
                 map.put("BImg2", R.mipmap.blank);
