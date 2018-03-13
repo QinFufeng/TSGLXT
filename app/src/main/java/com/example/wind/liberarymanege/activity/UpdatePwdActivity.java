@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.wind.liberarymanege.MainActivity;
 import com.example.wind.liberarymanege.R;
 import com.example.wind.liberarymanege.httpdb.DBUtil;
 
@@ -63,9 +62,9 @@ public class UpdatePwdActivity extends AppCompatActivity {
     };
 
     public void fanhui(View view) {
-        Intent intent=new Intent(UpdatePwdActivity.this,MainActivity.class);
+        //Intent intent=new Intent(UpdatePwdActivity.this,MainActivity.class);
         //intent.putExtra("name",NAME);
-        startActivity(intent) ;
+        //startActivity(intent) ;
         UpdatePwdActivity.this.finish();
     }
 

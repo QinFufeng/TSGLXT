@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:gravity="center"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/BImg"
+            android:layout_width="150dip"
+            android:layout_height="200dip"
+            android:layout_margin="5px"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5px">
+            <TextView
+                android:id="@+id/BName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的第一本书"
+                android:textSize="45px"/>
+            <LinearLayout
+                android:layout_marginLeft="5px"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="作者:"
+                    android:textSize="25px"/>
+                <TextView
+                    android:id="@+id/BAuthor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="阿锋"
+                    android:textSize="25px"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Llist2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/BImg2"
+            android:layout_width="150dip"
+            android:layout_height="200dip"
+            android:layout_margin="5px" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5px"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/BName2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的第一本书2"
+                android:textSize="45px" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="作者:"
+                    android:textSize="25px" />
+
+                <TextView
+                    android:id="@+id/BAuthor2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="阿锋2"
+                    android:textSize="25px" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

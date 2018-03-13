@@ -9,12 +9,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wind.liberarymanege.activity.UpdatePwdActivity;
 import com.example.wind.liberarymanege.activity.UpdateUserActivity;
 import com.example.wind.liberarymanege.httpdb.DBUtil;
+import com.example.wind.liberarymanege.httpdb.MyAdapter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout main1,type1,find1,user1,Imeu1,Imeu2,Imeu3,Imeu4;
@@ -82,7 +88,58 @@ public class MainActivity extends AppCompatActivity {
         Imeu2.setBackgroundColor(MainActivity.this.getResources().getColor(R.color.bg2));
         Imeu3.setBackgroundColor(MainActivity.this.getResources().getColor(R.color.bg2));
         Imeu4.setBackgroundColor(MainActivity.this.getResources().getColor(R.color.bg2));
+
+        ListView list1= (ListView) findViewById(R.id.lv);
+        MyAdapter adapter = new MyAdapter(this,R.layout.listitem,getData());
+        list1.setAdapter(adapter);
+
+        /*ListView list2= (ListView) findViewById(R.id.tvS);
+        SimpleAdapter listItemAdapter1=new SimpleAdapter(
+                this,
+                getData(),
+                R.layout.listitem,
+                new String[]{"BImg","BName","BAuthor","BImg2","BName2","BAuthor2"},
+                new int[]{R.id.BImg,R.id.BName,R.id.BAuthor});
+                list1.setAdapter(listItemAdapter1);
+        SimpleAdapter listItemAdapter2=new SimpleAdapter(
+                this,
+                getData(),
+                R.layout.listitem,
+                new String[]{"BImg","BName","BAuthor"},
+                new int[]{R.id.BImg,R.id.BName,R.id.BAuthor});
+        list2.setAdapter(listItemAdapter2);*/
+
     }
+    private ArrayList<Map<String,Object>> getData(){
+        ArrayList <Map<String,Object>> listitem=new ArrayList<Map<String,Object>>();
+        Map<String,Object> map=new HashMap<String,Object>();
+
+        DBUtil dbU=new DBUtil();
+        Bitmap d=dbU.stringToBitmap1(dd[0]);
+        for(int i=0;i<9;i++){
+
+            if(i!=0){map=new HashMap<String,Object>();}
+
+            map.put("BImg",d);
+            map.put("BName","shushushu"+i);
+            map.put("BAuthor","zuozhe"+i);
+
+            /*if(((i+1)*2-1)!=z) {
+                map.put("BImg2", R.mipmap.blank);
+                map.put("BName2", "shushushu" + i);
+                map.put("BAuthor2", "zuozhe" + i);
+            }
+            else {
+                map.put("BImg2","");
+                map.put("BName2", "");
+                map.put("BAuthor2", "");
+            }*/
+            listitem.add(map);
+        }
+
+        return listitem;
+    }
+
     public void typeClick(View view) {
         main1.setVisibility(View.GONE);
         type1.setVisibility(View.VISIBLE);
