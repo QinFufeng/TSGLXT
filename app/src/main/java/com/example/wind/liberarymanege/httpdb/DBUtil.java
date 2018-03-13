@@ -8,7 +8,9 @@ import com.example.wind.liberarymanege.bean.TUser;
 import org.ksoap2.serialization.SoapObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wind on 2017/12/21.
@@ -124,5 +126,27 @@ public class DBUtil {
                     list.add(tUser);
                 }
         return list;
+    }
+
+    public ArrayList<Map<String,Object>> getData(){
+        ArrayList <Map<String,Object>> listitem=new ArrayList<Map<String,Object>>();
+        Map<String,Object> map=new HashMap<String,Object>();
+
+        /*DBUtil dbU=new DBUtil();*/
+        String [] a={"username"};
+        String [] b={"aa"};
+        String dd=UserImage(a,b);
+        Bitmap d=stringToBitmap1(dd);
+        for(int i=0;i<11;i++){
+            if(i!=0){map=new HashMap<String,Object>();}
+            map.put("BImg",d);
+            map.put("BName","我的书"+i);
+            map.put("BAuthor","啊发"+i);
+            map.put("BPice",i+"元");
+
+            listitem.add(map);
+        }
+
+        return listitem;
     }
 }

@@ -84,8 +84,8 @@
 
                         <ImageView
                             android:id="@+id/userImage"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
+                            android:layout_width="150dp"
+                            android:layout_height="200dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@mipmap/blank" />
                     </LinearLayout>

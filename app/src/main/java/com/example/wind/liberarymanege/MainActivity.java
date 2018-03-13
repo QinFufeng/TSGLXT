@@ -18,10 +18,6 @@ import com.example.wind.liberarymanege.activity.UpdateUserActivity;
 import com.example.wind.liberarymanege.httpdb.DBUtil;
 import com.example.wind.liberarymanege.httpdb.MyAdapter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 public class MainActivity extends AppCompatActivity {
     private LinearLayout main1,type1,find1,user1,Imeu1,Imeu2,Imeu3,Imeu4;
     private TextView tvUsername;
@@ -29,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private String NAME;
     private int g=0;
     Bitmap ii;
+    DBUtil dbU=new DBUtil();
     final String[] dd=new String[1];
     Handler handler = new Handler(){
         @Override
@@ -75,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }.start();
-
+        Mainshow();
     }
 
     public void mainClick(View view) {
@@ -89,9 +86,7 @@ public class MainActivity extends AppCompatActivity {
         Imeu3.setBackgroundColor(MainActivity.this.getResources().getColor(R.color.bg2));
         Imeu4.setBackgroundColor(MainActivity.this.getResources().getColor(R.color.bg2));
 
-        ListView list1= (ListView) findViewById(R.id.lv);
-        MyAdapter adapter = new MyAdapter(this,R.layout.listitem,getData());
-        list1.setAdapter(adapter);
+        Mainshow();
 
         /*ListView list2= (ListView) findViewById(R.id.tvS);
         SimpleAdapter listItemAdapter1=new SimpleAdapter(
@@ -110,7 +105,12 @@ public class MainActivity extends AppCompatActivity {
         list2.setAdapter(listItemAdapter2);*/
 
     }
-    private ArrayList<Map<String,Object>> getData(){
+    private void Mainshow(){
+        ListView list1= (ListView) findViewById(R.id.lv);
+        MyAdapter adapter = new MyAdapter(this,R.layout.listitem,dbU.getData());
+        list1.setAdapter(adapter);
+    }
+    /*private ArrayList<Map<String,Object>> getData(){
         ArrayList <Map<String,Object>> listitem=new ArrayList<Map<String,Object>>();
         Map<String,Object> map=new HashMap<String,Object>();
 
@@ -124,22 +124,11 @@ public class MainActivity extends AppCompatActivity {
             map.put("BName","我的书"+i);
             map.put("BAuthor","啊发"+i);
             map.put("BPice",i+"元");
-
-            /*if(((i+1)*2-1)!=z) {
-                map.put("BImg2", R.mipmap.blank);
-                map.put("BName2", "shushushu" + i);
-                map.put("BAuthor2", "zuozhe" + i);
-            }
-            else {
-                map.put("BImg2","");
-                map.put("BName2", "");
-                map.put("BAuthor2", "");
-            }*/
             listitem.add(map);
         }
 
         return listitem;
-    }
+    }*/
 
     public void typeClick(View view) {
         main1.setVisibility(View.GONE);
@@ -175,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void goImage(){
         //Test t=new Test();
-        DBUtil dbU=new DBUtil();
+
         Bitmap d=dbU.stringToBitmap1(dd[0]);
 
             ivuser.setImageBitmap(d);
