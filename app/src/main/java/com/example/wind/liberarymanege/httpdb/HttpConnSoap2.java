@@ -29,7 +29,7 @@ public class HttpConnSoap2 {
 
         String namespace="http://tempuri.org/";//namespace
         String soapAction = "http://tempuri.org//"+way+"/";
-        String url = "http://192.168.42.222/WebService1.asmx";
+        String url = "http://192.168.42.123/WebService1.asmx";
         String methodName=way;//要调用的方法名称
         SoapObject re=new SoapObject(namespace,methodName);
         for(int i=0;i<par1.length;i++){

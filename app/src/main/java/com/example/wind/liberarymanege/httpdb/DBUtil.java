@@ -3,6 +3,7 @@ package com.example.wind.liberarymanege.httpdb;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.example.wind.liberarymanege.bean.TBook;
 import com.example.wind.liberarymanege.bean.TUser;
 
 import org.ksoap2.serialization.SoapObject;
@@ -19,6 +20,7 @@ import java.util.Map;
 public class DBUtil {
     private HttpConnSoap httpConnSoap;
     private HttpConnSoap2 httpConnSoap2;
+    private BookHttpConnSoap bookHttpConnSoap;
     //登陆验证
     public int Login(String[] par1,String[] par2){
         //boolean cc=false;
@@ -132,21 +134,53 @@ public class DBUtil {
         ArrayList <Map<String,Object>> listitem=new ArrayList<Map<String,Object>>();
         Map<String,Object> map=new HashMap<String,Object>();
 
-        /*DBUtil dbU=new DBUtil();*/
-        String [] a={"username"};
+        /*String [] a={"username"};
         String [] b={"aa"};
         String dd=UserImage(a,b);
-        Bitmap d=stringToBitmap1(dd);
-        for(int i=0;i<11;i++){
+        Bitmap d=stringToBitmap1(dd);*/
+
+        List<TBook> lb=ShowBooks();
+        int conut=lb.size();
+        for(int i=0;i<conut;i++){
+            TBook m=lb.get(i);
+            Bitmap bp=stringToBitmap1(m.getBphoto());
             if(i!=0){map=new HashMap<String,Object>();}
-            map.put("BImg",d);
-            map.put("BName","我的书"+i);
-            map.put("BAuthor","啊发"+i);
-            map.put("BPice",i+"元");
+            map.put("BImg",bp);
+            map.put("BName",m.getBname());
+            map.put("BAuthor",m.getBauthor());
+            map.put("BPice",m.getBprice()+"元");
 
             listitem.add(map);
         }
 
         return listitem;
+    }
+
+    public List<TBook> ShowBooks(){
+        bookHttpConnSoap=new BookHttpConnSoap();
+
+        List<TBook> list=new ArrayList<>();
+
+        //httpConnSoap2=new HttpConnSoap2();
+        //String [] a={"username"};String [] b={"aa"};
+        //String [] a={""};String [] b={""};
+        //SoapObject primitive=httpConnSoap2.HttpGo(a,b,"IsShowUser2");
+        SoapObject primitive=bookHttpConnSoap.HttpGo("IsShowBook");
+
+        for(int i=0;i<primitive.getPropertyCount();i++){
+            SoapObject mstr= (SoapObject) primitive.getProperty(i);
+
+            int id= Integer.parseInt(mstr.getProperty(0).toString()) ;
+            String bname=mstr.getProperty(1).toString();
+            String bauthor=mstr.getProperty(2).toString();
+            double bprice= Double.parseDouble(mstr.getProperty(3).toString()) ;
+            int btype= Integer.parseInt(mstr.getProperty(4).toString()) ;
+            String bphoto=mstr.getProperty(5).toString();
+
+            TBook tbook=new TBook(id,bname,bauthor,bprice,btype,bphoto);
+            //TBook tbook=new TBook(1,"ddd","pppp",10.5,123,"qqqq");
+            list.add(tbook);
+        }
+        return list;
     }
 }
