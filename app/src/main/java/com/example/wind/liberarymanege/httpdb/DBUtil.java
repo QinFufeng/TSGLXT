@@ -165,7 +165,7 @@ public class DBUtil {
         //String [] a={"username"};String [] b={"aa"};
         //String [] a={""};String [] b={""};
         //SoapObject primitive=httpConnSoap2.HttpGo(a,b,"IsShowUser2");
-        SoapObject primitive=bookHttpConnSoap.HttpGo("IsShowBook");
+        SoapObject primitive=bookHttpConnSoap.HttpGo("IsShowBooks");
 
         for(int i=0;i<primitive.getPropertyCount();i++){
             SoapObject mstr= (SoapObject) primitive.getProperty(i);
