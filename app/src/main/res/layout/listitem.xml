@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal">
     <LinearLayout
         android:gravity="center"
@@ -26,7 +27,7 @@
                 android:id="@+id/BName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="我的第一本书1"
+                tools:text="我的第一本书1"
                 android:textSize="45px" />
 
             <LinearLayout
@@ -45,7 +46,7 @@
                     android:id="@+id/BAuthor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="阿锋"
+                    tools:text="阿锋"
                     android:textSize="25px" />
 
                 <LinearLayout
@@ -64,7 +65,7 @@
                         android:id="@+id/BPice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="9.9"
+                        tools:text="9.9"
                         android:textColor="@color/red"
                         android:textSize="25px" />
                 </LinearLayout>
@@ -97,7 +98,7 @@
                 android:id="@+id/BName2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="我的第一本书2"
+                tools:text="我的第一本书2"
                 android:textSize="45px" />
 
             <LinearLayout
@@ -116,7 +117,7 @@
                     android:id="@+id/BAuthor2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="阿锋2"
+                    tools:text="阿锋2"
                     android:textSize="25px" />
 
                 <LinearLayout
@@ -135,7 +136,7 @@
                         android:id="@+id/BPice2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="9.7"
+                        tools:text="9.7"
                         android:textColor="@color/red"
                         android:textSize="25px" />
                 </LinearLayout>

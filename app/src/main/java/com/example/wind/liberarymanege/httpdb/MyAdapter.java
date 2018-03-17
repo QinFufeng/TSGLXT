@@ -1,6 +1,7 @@
 package com.example.wind.liberarymanege.httpdb;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +11,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.wind.liberarymanege.R;
+import com.example.wind.liberarymanege.activity.ShowBookActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,10 +86,14 @@ public class MyAdapter extends BaseAdapter {
             vh.tv11.setText(map.get("BName").toString());
             vh.tv12.setText(map.get("BAuthor").toString());
             vh.tv13.setText(map.get("BPice").toString());
+            final String id1=map.get("BId").toString();
             vh.tv11.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "p"+position, Toast.LENGTH_SHORT).show();
+                    Intent intent1=new Intent(context,ShowBookActivity.class);
+                    intent1.putExtra("id",id1);
+                    context.startActivity(intent1) ;
+                    //Toast.makeText(context, "p"+position, Toast.LENGTH_SHORT).show();
                 }
             });
             if (itemList.size() >1){
@@ -98,11 +103,14 @@ public class MyAdapter extends BaseAdapter {
                 vh.tv21.setText(map2.get("BName").toString());
                 vh.tv22.setText(map2.get("BAuthor").toString());
                 vh.tv23.setText(map2.get("BPice").toString());
-
+                final String id2=map2.get("BId").toString();
                 vh.tv21.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(context, "p"+position, Toast.LENGTH_SHORT).show();
+                        Intent intent2=new Intent(context,ShowBookActivity.class);
+                        intent2.putExtra("id",id2);
+                        context.startActivity(intent2) ;
+                        //Toast.makeText(context, "p"+position, Toast.LENGTH_SHORT).show();
                     }
                 });
             }else{

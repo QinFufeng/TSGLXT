@@ -139,7 +139,7 @@ public class DBUtil {
         String dd=UserImage(a,b);
         Bitmap d=stringToBitmap1(dd);*/
 
-        List<TBook> lb=ShowBooks();
+        List<TBook> lb=HuoquBooks();
         int conut=lb.size();
         for(int i=0;i<conut;i++){
             TBook m=lb.get(i);
@@ -149,6 +149,7 @@ public class DBUtil {
             map.put("BName",m.getBname());
             map.put("BAuthor",m.getBauthor());
             map.put("BPice",m.getBprice()+"元");
+            map.put("BId",m.getId());
 
             listitem.add(map);
         }
@@ -156,7 +157,7 @@ public class DBUtil {
         return listitem;
     }
 
-    public List<TBook> ShowBooks(){
+    public List<TBook> HuoquBooks(){
         bookHttpConnSoap=new BookHttpConnSoap();
 
         List<TBook> list=new ArrayList<>();
@@ -182,5 +183,24 @@ public class DBUtil {
             list.add(tbook);
         }
         return list;
+    }
+
+    public TBook HuoquBook(String id) {
+        bookHttpConnSoap=new BookHttpConnSoap();
+        //String id2=id+"";
+        String [] a={"id"};String [] b={id};
+        SoapObject so=bookHttpConnSoap.HttpGo2(a,b,"IsShowBook");
+
+            int bid= Integer.parseInt(so.getProperty(0).toString()) ;
+            String bname=so.getProperty(1).toString();
+            String bauthor=so.getProperty(2).toString();
+            String bsex=so.getProperty(3).toString();
+            double bprice= Double.parseDouble(so.getProperty(4).toString()) ;
+            String bdesc=so.getProperty(5).toString();
+            int btype= Integer.parseInt(so.getProperty(6).toString()) ;
+            String bphoto=so.getProperty(7).toString();
+        TBook book=new TBook(bid,bname,bauthor,bsex,bprice,bdesc,btype,bphoto);
+            //TBook book=new TBook();
+        return book;
     }
 }

@@ -35,6 +35,9 @@
         <activity android:name=".activity.UpdateUserActivity">
 
         </activity>
+        <activity android:name=".activity.ShowBookActivity">
+
+        </activity>
     </application>
 
 </manifest>
