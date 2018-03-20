@@ -3,6 +3,7 @@ package com.example.wind.liberarymanege.httpdb;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.example.wind.liberarymanege.bean.BType;
 import com.example.wind.liberarymanege.bean.TBook;
 import com.example.wind.liberarymanege.bean.TUser;
 
@@ -202,5 +203,66 @@ public class DBUtil {
         TBook book=new TBook(bid,bname,bauthor,bsex,bprice,bdesc,btype,bphoto);
             //TBook book=new TBook();
         return book;
+    }
+
+    public List<BType> HuoquBTypes(){
+        bookHttpConnSoap=new BookHttpConnSoap();
+
+        List<BType> list=new ArrayList<>();
+
+        //httpConnSoap2=new HttpConnSoap2();
+        //String [] a={"username"};String [] b={"aa"};
+        //String [] a={""};String [] b={""};
+        //SoapObject primitive=httpConnSoap2.HttpGo(a,b,"IsShowUser2");
+        SoapObject primitive=bookHttpConnSoap.HttpGo("IsBookTypes");
+
+        for(int i=0;i<primitive.getPropertyCount();i++){
+            SoapObject mstr= (SoapObject) primitive.getProperty(i);
+
+            int tid= Integer.parseInt(mstr.getProperty(0).toString()) ;
+            String tname=mstr.getProperty(1).toString();
+            String tdesc=mstr.getProperty(2).toString();
+
+            BType bType=new BType(tid,tname,tdesc);
+            //TBook tbook=new TBook(1,"ddd","pppp",10.5,123,"qqqq");
+            list.add(bType);
+        }
+        return list;
+    }
+
+    public List<TBook> HuoquTypeBooks(String tid) {
+        bookHttpConnSoap=new BookHttpConnSoap();
+        List<TBook> list=new ArrayList<>();
+
+        String [] a={"tid"};String [] b={tid};
+        SoapObject so=bookHttpConnSoap.HttpGo2(a,b,"IsTypeBooks");
+        for(int i=0;i<so.getPropertyCount();i++) {
+            SoapObject mstr= (SoapObject) so.getProperty(i);
+            int bid = Integer.parseInt(mstr.getProperty(0).toString());
+            String bname = mstr.getProperty(1).toString();
+            String bauthor = mstr.getProperty(2).toString();
+            double bprice = Double.parseDouble(mstr.getProperty(3).toString());
+            TBook book = new TBook(bid, bname, bauthor,  bprice);
+            list.add(book);
+        }
+        return list;
+    }
+
+    public List<TBook> HuoquFindBooks(String txt) {
+        bookHttpConnSoap=new BookHttpConnSoap();
+        List<TBook> list=new ArrayList<>();
+
+        String [] a={"txt"};String [] b={txt};
+        SoapObject so=bookHttpConnSoap.HttpGo2(a,b,"IsFindBooks");
+        for(int i=0;i<so.getPropertyCount();i++) {
+            SoapObject mstr= (SoapObject) so.getProperty(i);
+            int bid = Integer.parseInt(mstr.getProperty(0).toString());
+            String bname = mstr.getProperty(1).toString();
+            String bauthor = mstr.getProperty(2).toString();
+            double bprice = Double.parseDouble(mstr.getProperty(3).toString());
+            TBook book = new TBook(bid, bname, bauthor,  bprice);
+            list.add(book);
+        }
+        return list;
     }
 }

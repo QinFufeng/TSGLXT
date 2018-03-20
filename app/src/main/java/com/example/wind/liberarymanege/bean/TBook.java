@@ -10,14 +10,13 @@ public class TBook {
     private String bauthor;
     private String bsex;
     private double bprice;
-
-    public TBook() {
-    }
-
     private String bdesc;
     private int btype;
     private String bphoto;
 
+    public TBook() {
+
+    }
     public TBook(int id, String bname, String bauthor, double bprice, int btype, String bphoto) {
         this.id = id;
         this.bname = bname;
@@ -37,6 +36,13 @@ public class TBook {
         this.bdesc = bdesc;
         this.btype = btype;
         this.bphoto = bphoto;
+    }
+
+    public TBook(int id, String bname, String bauthor, double bprice) {
+        this.id = id;
+        this.bname = bname;
+        this.bauthor = bauthor;
+        this.bprice = bprice;
     }
 
     public int getId() {
