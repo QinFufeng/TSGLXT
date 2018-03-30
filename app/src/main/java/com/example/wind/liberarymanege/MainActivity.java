@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.wind.liberarymanege.activity.AdminActivity;
 import com.example.wind.liberarymanege.activity.ShowBookActivity;
 import com.example.wind.liberarymanege.activity.UpdatePwdActivity;
 import com.example.wind.liberarymanege.activity.UpdateUserActivity;
@@ -208,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
                 this,
                 ShowTypebooksgetData(obj),
                 R.layout.typebooks,
-                new String[]{"BName","BAuthor","BPrice"},
+                new String[]{"BName","BAuthor","BCount"},
                 new int[]{R.id.typebooksname,R.id.typebookszuozhe,R.id.typebookspice});
         typelv2.setAdapter(listItemAdapter3);
         typelv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -238,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
             //map.put("BId",m.getId());
             map.put("BName",m.getBname());
             map.put("BAuthor",m.getBauthor());
-            map.put("BPrice",m.getBprice()+"元");
+            map.put("BCount",m.getCount()+"本");
             map.put("BId",m.getId());
 
             list.add(map);
@@ -332,7 +333,7 @@ public class MainActivity extends AppCompatActivity {
                 this,
                 ShowTypebooksgetData(obj),
                 R.layout.typebooks,
-                new String[]{"BName","BAuthor","BPrice"},
+                new String[]{"BName","BAuthor","BCount"},
                 new int[]{R.id.typebooksname,R.id.typebookszuozhe,R.id.typebookspice});
         findlv3.setAdapter(listItemAdapter4);
         findlv3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -348,6 +349,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goadmin(View view) {
-
+        Intent intent=new Intent(MainActivity.this, AdminActivity.class);
+        startActivity(intent);
     }
 }

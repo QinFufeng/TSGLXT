@@ -17,7 +17,6 @@
         android:layout_weight="1">
 
         <LinearLayout
-android:visibility="gone"
             android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -117,7 +116,7 @@ android:visibility="gone"
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="价格"
+                        android:text="数量"
                         android:textColor="@color/red"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -136,7 +135,7 @@ android:visibility="gone"
 
         </LinearLayout>
         <LinearLayout
-
+            android:visibility="gone"
             android:id="@+id/find"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -210,7 +209,7 @@ android:visibility="gone"
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="价格"
+                            android:text="数量"
                             android:textColor="@color/red"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -368,14 +367,14 @@ android:visibility="gone"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_weight="9">
+
             <TextView
 
-                android:onClick="findClick"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="查找图书"
                 android:gravity="center"
-                />
+                android:onClick="findClick"
+                android:text="搜索图书" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/meu4"

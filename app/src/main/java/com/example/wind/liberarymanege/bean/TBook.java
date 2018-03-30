@@ -9,40 +9,41 @@ public class TBook {
     private String bname;
     private String bauthor;
     private String bsex;
-    private double bprice;
+    private int count;
     private String bdesc;
-    private int btype;
+    private String btype;
     private String bphoto;
+    private String location;
 
     public TBook() {
 
     }
-    public TBook(int id, String bname, String bauthor, double bprice, int btype, String bphoto) {
+    public TBook(int id, String bname, String bauthor, int count, String bphoto) {
         this.id = id;
         this.bname = bname;
         this.bauthor = bauthor;
-        this.bprice = bprice;
-        this.btype = btype;
+        this.count = count;
+        //this.btype = btype;
         this.bphoto = bphoto;
     }
 
-    public TBook(int id, String bname, String bauthor, String bsex, double bprice, String bdesc, int btype, String bphoto) {
-
+    public TBook(int id, String bname, String bauthor, String bsex, int count, String bdesc, String btype, String bphoto, String location) {
         this.id = id;
         this.bname = bname;
         this.bauthor = bauthor;
         this.bsex = bsex;
-        this.bprice = bprice;
+        this.count = count;
         this.bdesc = bdesc;
         this.btype = btype;
         this.bphoto = bphoto;
+        this.location = location;
     }
 
-    public TBook(int id, String bname, String bauthor, double bprice) {
+    public TBook(int id, String bname, String bauthor, int count) {
         this.id = id;
         this.bname = bname;
         this.bauthor = bauthor;
-        this.bprice = bprice;
+        this.count = count;
     }
 
     public int getId() {
@@ -77,12 +78,12 @@ public class TBook {
         this.bsex = bsex;
     }
 
-    public double getBprice() {
-        return bprice;
+    public int getCount() {
+        return count;
     }
 
-    public void setBprice(double bprice) {
-        this.bprice = bprice;
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public String getBdesc() {
@@ -93,11 +94,11 @@ public class TBook {
         this.bdesc = bdesc;
     }
 
-    public int getBtype() {
+    public String getBtype() {
         return btype;
     }
 
-    public void setBtype(int btype) {
+    public void setBtype(String btype) {
         this.btype = btype;
     }
 
@@ -107,5 +108,13 @@ public class TBook {
 
     public void setBphoto(String bphoto) {
         this.bphoto = bphoto;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

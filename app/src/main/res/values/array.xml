@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="msa">
+        <item>添加图书类别</item>
+        <item>图书类别维护</item>
+    </string-array>
+
+    <string-array name="msb">
+        <item>添加图书</item>
+        <item>图书维护</item>
+    </string-array>
+
+    <string-array name="msc">
+        <item>删除</item>
+        <item>修改</item>
+    </string-array>
+</resources>

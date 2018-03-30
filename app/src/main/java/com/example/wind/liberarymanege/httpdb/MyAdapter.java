@@ -85,7 +85,7 @@ public class MyAdapter extends BaseAdapter {
             vh.iv1.setImageBitmap((Bitmap) map.get("BImg"));
             vh.tv11.setText(map.get("BName").toString());
             vh.tv12.setText(map.get("BAuthor").toString());
-            vh.tv13.setText(map.get("BPice").toString());
+            vh.tv13.setText(map.get("BCount").toString());
             final String id1=map.get("BId").toString();
             vh.tv11.setOnClickListener(new OnClickListener() {
                 @Override
@@ -102,7 +102,7 @@ public class MyAdapter extends BaseAdapter {
                 vh.iv2.setImageBitmap((Bitmap) map2.get("BImg"));
                 vh.tv21.setText(map2.get("BName").toString());
                 vh.tv22.setText(map2.get("BAuthor").toString());
-                vh.tv23.setText(map2.get("BPice").toString());
+                vh.tv23.setText(map2.get("BCount").toString());
                 final String id2=map2.get("BId").toString();
                 vh.tv21.setOnClickListener(new OnClickListener() {
                     @Override

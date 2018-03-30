@@ -12,6 +12,15 @@ public class TUser {
     private String phone;
     private String email;
     private String photo;
+    private int rank;
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
 
     public int getId() {
         return id;

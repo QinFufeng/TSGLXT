@@ -1,10 +1,12 @@
 package com.example.wind.liberarymanege.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by wind on 2018/3/18.
  */
 
-public class BType {
+public class BType implements Serializable{
     private int tid;
     private String tname;
     private String tdesc;

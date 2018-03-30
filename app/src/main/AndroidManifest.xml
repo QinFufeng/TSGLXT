@@ -38,6 +38,17 @@
         <activity android:name=".activity.ShowBookActivity">
 
         </activity>
+        <activity android:name=".activity.AdminActivity">
+
+        </activity>
+
+        <activity android:name=".activity.TypeAdd">
+
+        </activity>
+
+        <activity android:name=".activity.WeihuType">
+
+        </activity>
     </application>
 
 </manifest>

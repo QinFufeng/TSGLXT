@@ -149,7 +149,7 @@ public class DBUtil {
             map.put("BImg",bp);
             map.put("BName",m.getBname());
             map.put("BAuthor",m.getBauthor());
-            map.put("BPice",m.getBprice()+"元");
+            map.put("BCount",m.getCount()+"本");
             map.put("BId",m.getId());
 
             listitem.add(map);
@@ -175,11 +175,10 @@ public class DBUtil {
             int id= Integer.parseInt(mstr.getProperty(0).toString()) ;
             String bname=mstr.getProperty(1).toString();
             String bauthor=mstr.getProperty(2).toString();
-            double bprice= Double.parseDouble(mstr.getProperty(3).toString()) ;
-            int btype= Integer.parseInt(mstr.getProperty(4).toString()) ;
-            String bphoto=mstr.getProperty(5).toString();
+            int bcount= Integer.parseInt(mstr.getProperty(3).toString()) ;
+            String bphoto=mstr.getProperty(4).toString();
 
-            TBook tbook=new TBook(id,bname,bauthor,bprice,btype,bphoto);
+            TBook tbook=new TBook(id,bname,bauthor,bcount,bphoto);
             //TBook tbook=new TBook(1,"ddd","pppp",10.5,123,"qqqq");
             list.add(tbook);
         }
@@ -196,11 +195,12 @@ public class DBUtil {
             String bname=so.getProperty(1).toString();
             String bauthor=so.getProperty(2).toString();
             String bsex=so.getProperty(3).toString();
-            double bprice= Double.parseDouble(so.getProperty(4).toString()) ;
+            int bcount= Integer.parseInt(so.getProperty(4).toString()) ;
             String bdesc=so.getProperty(5).toString();
-            int btype= Integer.parseInt(so.getProperty(6).toString()) ;
+            String btype= so.getProperty(6).toString() ;
             String bphoto=so.getProperty(7).toString();
-        TBook book=new TBook(bid,bname,bauthor,bsex,bprice,bdesc,btype,bphoto);
+            String blocation=so.getProperty(8).toString();
+        TBook book=new TBook(bid,bname,bauthor,bsex,bcount,bdesc,btype,bphoto,blocation);
             //TBook book=new TBook();
         return book;
     }
@@ -241,8 +241,8 @@ public class DBUtil {
             int bid = Integer.parseInt(mstr.getProperty(0).toString());
             String bname = mstr.getProperty(1).toString();
             String bauthor = mstr.getProperty(2).toString();
-            double bprice = Double.parseDouble(mstr.getProperty(3).toString());
-            TBook book = new TBook(bid, bname, bauthor,  bprice);
+            int bcount = Integer.parseInt(mstr.getProperty(3).toString());
+            TBook book = new TBook(bid, bname, bauthor, bcount);
             list.add(book);
         }
         return list;
@@ -259,10 +259,31 @@ public class DBUtil {
             int bid = Integer.parseInt(mstr.getProperty(0).toString());
             String bname = mstr.getProperty(1).toString();
             String bauthor = mstr.getProperty(2).toString();
-            double bprice = Double.parseDouble(mstr.getProperty(3).toString());
-            TBook book = new TBook(bid, bname, bauthor,  bprice);
+            int bcount = Integer.parseInt(mstr.getProperty(3).toString());
+            TBook book = new TBook(bid, bname, bauthor,  bcount);
             list.add(book);
         }
         return list;
+    }
+
+    public String TypeAddBool(String tnsme,String tdesc) {
+        bookHttpConnSoap=new BookHttpConnSoap();
+        String [] a={"typename","typedesc"};String [] b={tnsme,tdesc};
+        String so=bookHttpConnSoap.HttpGo3(a,b,"IsAddType");
+        return so;
+    }
+
+    public String TypeAltBool(String tid,String tnsme,String tdesc) {
+        bookHttpConnSoap=new BookHttpConnSoap();
+        String [] a={"tid","typename","typedesc"};String [] b={tid,tnsme,tdesc};
+        String so=bookHttpConnSoap.HttpGo3(a,b,"IsAltType");
+        return so;
+    }
+
+    public String TypeDelBool(String tid) {
+        bookHttpConnSoap=new BookHttpConnSoap();
+        String [] a={"tid"};String [] b={tid};
+        String so=bookHttpConnSoap.HttpGo3(a,b,"IsDelType");
+        return so;
     }
 }

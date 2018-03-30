@@ -21,30 +21,64 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <TextView
-
-                android:id="@+id/showbooktype"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"
-                tools:text="天文类" />
-            <Spinner
-                android:id="@+id/spinner_type"
+                android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="作者："/>
+                    <TextView
+                        android:id="@+id/showbookzuozhe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        tools:text="啊啊啊啊  " />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="性别："/>
+                    <TextView
+                        android:id="@+id/showbooksex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="男"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="书名："
-                android:textSize="24sp" />
-            <TextView
-                android:id="@+id/showbookname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="书名啊"
-                android:textSize="24sp" />
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/showbooktype"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="24sp"
+                    tools:text="天文类" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="书名："
+                    android:textSize="24sp" />
+                <TextView
+                    android:id="@+id/showbookname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="书名啊"
+                    android:textSize="24sp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -52,17 +86,23 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/showbookzuozhe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                tools:text="作者：啊啊啊啊  性别：男" />
+                android:text="位置:"
+                android:textColor="@color/bg1"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/showbooklocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                tools:text="一楼二排三号" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,12 +112,12 @@
             android:gravity="right">
 
             <TextView
-                android:id="@+id/showbookjiage"
+                android:id="@+id/showbookcount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/red"
                 android:textSize="18sp"
-                tools:text="￥：88.8" />
+                tools:text="数量：88.8" />
         </LinearLayout>
     </LinearLayout>
 
@@ -96,7 +136,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                tools:text="asdadsadsssssssssssssssssssaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
+                tools:text="的顺丰顺丰顺规定VCD续费不行的新政策DVD是支持者v的故事发生sea晚上丰顺丰是个" />
         </ScrollView>
     </LinearLayout>
     <LinearLayout
@@ -111,22 +151,7 @@
             android:layout_gravity="bottom"
             android:layout_marginLeft="10px"
             android:layout_marginRight="10px"
-            android:text="返回" />
-
-        <Button
-            android:layout_marginLeft="10px"
-            android:layout_marginRight="10px"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:text="取消" />
-
-        <Button
-            android:layout_marginLeft="10px"
-            android:layout_marginRight="10px"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:text="确认" />
+            android:text="返回"
+            android:onClick="showbookEnd"/>
     </LinearLayout>
 </LinearLayout>
