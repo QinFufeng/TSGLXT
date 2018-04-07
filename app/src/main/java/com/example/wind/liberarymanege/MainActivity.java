@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wind.liberarymanege.activity.AdminActivity;
+import com.example.wind.liberarymanege.activity.LoginActivity;
 import com.example.wind.liberarymanege.activity.ShowBookActivity;
 import com.example.wind.liberarymanege.activity.UpdatePwdActivity;
 import com.example.wind.liberarymanege.activity.UpdateUserActivity;
@@ -34,11 +35,11 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout main1,type1,find1,user1,Imeu1,Imeu2,Imeu3,Imeu4;
-    private TextView tvUsername,typedesc;
+    private TextView tvUsername,typedesc,admintxt,supadmintxt;
     private ImageView ivuser;
     private Spinner typesp;
     private ListView typelv2;
-    private String NAME;
+    private String NAME,rank;
     private int g=0;
     Bitmap ii;
     DBUtil dbU=new DBUtil();
@@ -73,9 +74,18 @@ public class MainActivity extends AppCompatActivity {
         tvUsername=(TextView) findViewById(R.id.Tusername);
         ivuser=(ImageView)findViewById(R.id.userImage);
 
+        admintxt=(TextView) findViewById(R.id.admintxt);
+        supadmintxt=(TextView) findViewById(R.id.supadminxtx);
+
         Intent in=getIntent();
         NAME=in.getStringExtra("name");
-        tvUsername.setText(NAME);
+        rank=in.getStringExtra("rank");
+        tvUsername.setText(rank);
+        switch (rank)
+        {
+            case "3":supadmintxt.setVisibility(View.VISIBLE);
+            case "2":admintxt.setVisibility(View.VISIBLE);break;
+        }
 
         Mainshowdata();
     }
@@ -326,30 +336,51 @@ public class MainActivity extends AppCompatActivity {
 
     private void findShow(Object obj)
     {
-        ListView findlv3= (ListView) findViewById(R.id.lv3);
-        LinearLayout tou= (LinearLayout) findViewById(R.id.findbookstou);
-        tou.setVisibility(View.VISIBLE);
-        SimpleAdapter listItemAdapter4=new SimpleAdapter(
-                this,
-                ShowTypebooksgetData(obj),
-                R.layout.typebooks,
-                new String[]{"BName","BAuthor","BCount"},
-                new int[]{R.id.typebooksname,R.id.typebookszuozhe,R.id.typebookspice});
-        findlv3.setAdapter(listItemAdapter4);
-        findlv3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Map<String,Object> clkmap= (Map<String, Object>) parent.getItemAtPosition(position);
-                //typedesc.setText("id is:"+clkmap.get("BId").toString());
-                Intent intype=new Intent(MainActivity.this, ShowBookActivity.class);
-                intype.putExtra("id",clkmap.get("BId").toString());
-                startActivity(intype);
-            }
-        });
+        ListView findlv3 = (ListView) findViewById(R.id.lv3);
+        List<TBook> books= (List<TBook>) obj;
+        LinearLayout tou = (LinearLayout) findViewById(R.id.findbookstou);
+        LinearLayout tou2 = (LinearLayout) findViewById(R.id.chabudaoshu);
+        if(books.size()>0) {
+            tou.setVisibility(View.VISIBLE);
+            tou2.setVisibility(View.GONE);
+            findlv3.setVisibility(View.VISIBLE);
+            SimpleAdapter listItemAdapter4 = new SimpleAdapter(
+                    this,
+                    ShowTypebooksgetData(obj),
+                    R.layout.typebooks,
+                    new String[]{"BName", "BAuthor", "BCount"},
+                    new int[]{R.id.typebooksname, R.id.typebookszuozhe, R.id.typebookspice});
+            findlv3.setAdapter(listItemAdapter4);
+            findlv3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Map<String, Object> clkmap = (Map<String, Object>) parent.getItemAtPosition(position);
+                    //typedesc.setText("id is:"+clkmap.get("BId").toString());
+                    Intent intype = new Intent(MainActivity.this, ShowBookActivity.class);
+                    intype.putExtra("id", clkmap.get("BId").toString());
+                    startActivity(intype);
+                }
+            });
+        }
+        else
+        {
+            tou.setVisibility(View.GONE);
+            tou2.setVisibility(View.VISIBLE);
+            findlv3.setVisibility(View.GONE);
+        }
     }
 
     public void goadmin(View view) {
         Intent intent=new Intent(MainActivity.this, AdminActivity.class);
         startActivity(intent);
+    }
+
+    public void gosupadmin(View view) {
+    }
+
+    public void gologin(View view) {
+        Intent intent=new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+        MainActivity.this.finish();
     }
 }

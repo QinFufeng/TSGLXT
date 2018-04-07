@@ -3,24 +3,50 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 <LinearLayout
+    android:background="@mipmap/splash1"
     android:orientation="vertical"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center">
+
     <Button
         android:id="@+id/typeGl"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="图书类别管理"/>
+        android:background="@color/bg1"
+        android:text="图书类别管理" />
 
     <Button
         android:id="@+id/bookGl"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="图书管理"/>
+        android:background="@color/bg1"
+        android:text="图书管理" />
+
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@android:color/holo_blue_bright"
+        android:onClick="goBorrowBooks"
+        android:text="借书管理" />
+
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@android:color/holo_blue_bright"
+        android:text="续借管理" />
+
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@android:color/holo_blue_bright"
+        android:text="还书管理" />
 </LinearLayout>
 </android.support.constraint.ConstraintLayout>

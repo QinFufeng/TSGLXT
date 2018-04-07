@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.wind.liberarymanege.R;
 
@@ -76,7 +75,15 @@ public class AdminActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(AdminActivity.this, "您选择了"+getResources().getStringArray(R.array.msb)[which], Toast.LENGTH_LONG).show();
+                                //Toast.makeText(AdminActivity.this, "您选择了"+getResources().getStringArray(R.array.msb)[which], Toast.LENGTH_LONG).show();
+                                if(which==0){
+                                    Intent intent=new Intent(AdminActivity.this,BookAdd.class);
+                                    startActivity(intent);
+                                }
+                                else {
+                                    Intent intent=new Intent(AdminActivity.this,BookAdd.class);
+                                    startActivity(intent);
+                                }
                             }
                         }
                 );
@@ -86,4 +93,8 @@ public class AdminActivity extends AppCompatActivity {
         return dialog;
     }
 
+    public void goBorrowBooks(View view) {
+        Intent intent=new Intent(AdminActivity.this,BorrowBooks.class);
+        startActivity(intent);
+    }
 }

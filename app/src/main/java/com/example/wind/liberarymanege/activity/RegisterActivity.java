@@ -188,4 +188,8 @@ public class RegisterActivity extends AppCompatActivity {
         bt2.setEnabled(true);
         layoutLoad.setVisibility(View.GONE);
     }
+
+    public void registerEnd(View view) {
+        RegisterActivity.this.finish();
+    }
 }

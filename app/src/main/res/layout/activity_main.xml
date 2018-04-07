@@ -17,13 +17,12 @@
         android:layout_weight="1">
 
         <LinearLayout
+
             android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#FFF000"
             android:orientation="horizontal">
-
-
 
                         <ListView
                             android:id="@+id/lv"
@@ -37,9 +36,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             />-->
-
-
-
         </LinearLayout>
         <LinearLayout
 android:visibility="gone"
@@ -135,7 +131,7 @@ android:visibility="gone"
 
         </LinearLayout>
         <LinearLayout
-            android:visibility="gone"
+android:visibility="gone"
             android:id="@+id/find"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -163,27 +159,44 @@ android:visibility="gone"
                     android:text="搜索"
                     android:onClick="findButtonClick"/>
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/chabudaoshu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="查无此书！"
+                    android:textColor="@android:color/black"
+                    android:textSize="24sp" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <LinearLayout
 
                     android:id="@+id/findbookstou"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
                     <LinearLayout
-                        android:layout_weight="3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5sp"
-                        >
+                        android:layout_weight="3">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="18sp"
-                            android:text="书名" />
+                            android:text="书名"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -229,11 +242,12 @@ android:visibility="gone"
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/user"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone">
+            >
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -308,14 +322,26 @@ android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="注销登陆"
-                            android:textSize="30sp" />
+                            android:textSize="30sp"
+                            android:onClick="gologin"/>
 
                         <TextView
+                            android:id="@+id/admintxt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:onClick="goadmin"
                             android:text="图书管理"
                             android:textSize="30sp"
-                            android:onClick="goadmin"/>
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/supadminxtx"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:onClick="gosupadmin"
+                            android:text="系统管理"
+                            android:textSize="30sp"
+                            android:visibility="gone" />
                     </LinearLayout>
                 </LinearLayout>
             </ScrollView>

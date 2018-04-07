@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity{
         @Override
         public void handleMessage(Message msg) {
             switch(msg.what){
-                case 1:gomain();break;
+                case 1:gomain(msg.obj);break;
                     //Toast.makeText(MainActivity.this, "连接服务器失败", Toast.LENGTH_LONG).show();
 
                 default:Toast.makeText(LoginActivity.this, "程序出错！", Toast.LENGTH_LONG).show();
@@ -84,8 +84,9 @@ public class LoginActivity extends AppCompatActivity{
                     @Override
                     public void run() {
 
-                        dd[0] =dbUtil.Login(a,b);
+                        //dd[0] =dbUtil.Login(a,b);
                         Message msg = new Message();
+                        msg.obj=dbUtil.Login(a,b);
                         msg.what = 1;
                         handler.sendMessage(msg);
 
@@ -107,19 +108,22 @@ public class LoginActivity extends AppCompatActivity{
         Intent intent2=new Intent(LoginActivity.this,RegisterActivity.class);
         startActivity(intent2) ;
     }
-    public  void gomain(){
-        int cc= dd[0];//dbUtil.Login(a,b);
+    public  void gomain(Object obj){
+        //int cc= dd[0];//dbUtil.Login(a,b);
         //loading.setEnabled(true);
 
         //DialogUIUtils.showMdLoadingHorizontal(this, "加载中...").show();
         //Toast.makeText(LoginActivity.this, cc, Toast.LENGTH_SHORT).show();
-        if(cc==0){
+        String [] ss= (String[]) obj;
+        String cc=ss[0];
+        if(cc.equals("0")){
             Intent intent=new Intent(LoginActivity.this,MainActivity.class);
             intent.putExtra("name",NAME);
+            intent.putExtra("rank",ss[1]);
             startActivity(intent) ;
             LoginActivity.this.finish();
         }
-        else if(cc==1){
+        else if(cc.equals("1")){
             Toast.makeText(LoginActivity.this,"用户名或密码错误！", Toast.LENGTH_SHORT).show();
             showControl();
         }
