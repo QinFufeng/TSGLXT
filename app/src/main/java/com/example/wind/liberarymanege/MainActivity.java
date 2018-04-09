@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         Intent in=getIntent();
         NAME=in.getStringExtra("name");
         rank=in.getStringExtra("rank");
-        tvUsername.setText(rank);
+        tvUsername.setText(NAME);
         switch (rank)
         {
             case "3":supadmintxt.setVisibility(View.VISIBLE);

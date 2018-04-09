@@ -78,8 +78,6 @@ public class LoginActivity extends AppCompatActivity{
                 register.setEnabled(false);
                 login.setEnabled(false);
 
-
-
                 new Thread(){
                     @Override
                     public void run() {

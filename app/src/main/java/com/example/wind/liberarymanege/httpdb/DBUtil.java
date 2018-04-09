@@ -2,6 +2,7 @@ package com.example.wind.liberarymanege.httpdb;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Base64;
 
 import com.example.wind.liberarymanege.bean.BType;
 import com.example.wind.liberarymanege.bean.TBook;
@@ -9,6 +10,8 @@ import com.example.wind.liberarymanege.bean.TUser;
 
 import org.ksoap2.serialization.SoapObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -87,6 +90,7 @@ public class DBUtil {
         String[] es=httpConnSoap.HttpGo(par1,par2,"IsShowUser");
         return es[5];
     }
+    /*图片与64位转换*/
     public Bitmap stringToBitmap1(String string) {
         Bitmap bitmap = null;
         try {
@@ -103,24 +107,53 @@ public class DBUtil {
 
         return bitmap;
     }
+    public String bitmapToBase64(Bitmap bitmap) {
+
+        String result = null;
+        ByteArrayOutputStream baos = null;
+        try {
+            if (bitmap != null) {
+                baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+
+                baos.flush();
+                baos.close();
+
+                byte[] bitmapBytes = baos.toByteArray();
+                result = Base64.encodeToString(bitmapBytes, Base64.DEFAULT);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (baos != null) {
+                    baos.flush();
+                    baos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+    /*********************************************************************/
+
     public List<TUser> ShowUser(String[] par1, String[] par2){
         httpConnSoap2=new HttpConnSoap2();
         List<TUser> list=new ArrayList<>();
         SoapObject primitive=httpConnSoap2.HttpGo(par1,par2,"IsShowUser2");
         for(int i=0;i<primitive.getPropertyCount();i++){
                     SoapObject mstr= (SoapObject) primitive.getProperty(i);
-
+                    int uid=Integer.parseInt(mstr.getProperty(0).toString());
                     String username=mstr.getProperty(1).toString();
                     String userpwd=mstr.getProperty(2).toString();
                     String sex=mstr.getProperty(3).toString();
                     String phone=mstr.getProperty(4).toString();
                     String email=mstr.getProperty(5).toString();
                     String photo=mstr.getProperty(6).toString();
-                    //String sss=username+userpwd+sex+phone+email+photo;
-                    //strings[i]=sss;
 
-                    //ttt[i]=new TUser(username,userpwd,sex,phone,email,photo);
                     TUser tUser=new TUser();
+                    tUser.setId(uid);
                     tUser.setUsername(username);
                     tUser.setUserpassword(userpwd);
                     tUser.setSex(sex);
@@ -287,6 +320,12 @@ public class DBUtil {
         bookHttpConnSoap=new BookHttpConnSoap();
         String [] a={"tid"};String [] b={tid};
         String so=bookHttpConnSoap.HttpGo3(a,b,"IsDelType");
+        return so;
+    }
+
+    public String Updateuser(String []a,String [] b) {
+        httpConnSoap=new HttpConnSoap();
+        String so=httpConnSoap.HttpGo3(a,b,"IsUpdateUser");
         return so;
     }
 }
