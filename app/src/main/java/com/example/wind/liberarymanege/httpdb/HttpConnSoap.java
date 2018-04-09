@@ -48,19 +48,14 @@ public class HttpConnSoap {
 
                     SoapObject primitive = (SoapObject) env.getResponse();
                     int cont = primitive.getPropertyCount();
-                    cc = new String[cont];
-                    for (int i = 0; i < cont; i++) {
-                        cc[i] = primitive.getProperty(i).toString();
+                    if(cont!=0) {
+                        cc = new String[cont];
+                        for (int i = 0; i < cont; i++) {
+                            cc[i] = primitive.getProperty(i).toString();
+                        }
+                        return cc;
                     }
 
-                    //primitive= (SoapObject) env.getResponse();
-                    //cc=primitive.getProperty(0).toString();
-                    //int i=primitive.getPropertyCount();
-                    //cc=""+i;
-                    //cc=ss[0];
-
-                    //cc=String.valueOf(env.getResponse());
-                    return cc;
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (XmlPullParserException e) {

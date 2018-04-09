@@ -25,7 +25,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wind.liberarymanege.R;
@@ -128,7 +127,7 @@ public class UpdateUserActivity extends AppCompatActivity {
         String uphone=phone.getText().toString();
         String uemail=email.getText().toString();
         image.setDrawingCacheEnabled(true);
-        Bitmap bitmap=Bitmap.createBitmap(convertViewToBitmap(image));
+        Bitmap bitmap=Bitmap.createBitmap(dbUtil.convertViewToBitmap(image));
         image.setDrawingCacheEnabled(false);
         String uphoto=dbUtil.bitmapToBase64(bitmap);
         if(uname.equals("")){
@@ -169,8 +168,8 @@ public class UpdateUserActivity extends AppCompatActivity {
 
     private void godate(Object obj){
         String c= (String) obj;
-        TextView tt= (TextView) findViewById(R.id.testtxt);
-        tt.setText(c);
+        //TextView tt= (TextView) findViewById(R.id.testtxt);
+        //tt.setText(c);
         if(c.equals("true")){
             AlertDialog.Builder builder=new AlertDialog.Builder(this);
             builder.setTitle("提示")
@@ -179,6 +178,9 @@ public class UpdateUserActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //commit();
+                            Intent intent=new Intent();
+                            intent.putExtra("name",name.getText().toString());
+                            setResult(RESULT_OK,intent);
                             UpdateUserActivity.this.finish();
                         }
                     });
@@ -231,13 +233,13 @@ public class UpdateUserActivity extends AppCompatActivity {
         }
     };
 
-    public Bitmap convertViewToBitmap(View view){
+    /*public Bitmap convertViewToBitmap(View view){
         view.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
         view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
         view.buildDrawingCache();
         Bitmap bitmap = view.getDrawingCache();
         return bitmap;
-    }
+    }*/
 
     public void setuserimg(View view) {
         showDialog(1);

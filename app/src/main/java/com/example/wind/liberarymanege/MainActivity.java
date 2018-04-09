@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         Intent in=getIntent();
         NAME=in.getStringExtra("name");
         rank=in.getStringExtra("rank");
-        tvUsername.setText(NAME);
+
         switch (rank)
         {
             case "3":supadmintxt.setVisibility(View.VISIBLE);
@@ -278,7 +278,12 @@ public class MainActivity extends AppCompatActivity {
         Imeu2.setBackgroundColor(MainActivity.this.getResources().getColor(R.color.bg2));
         Imeu3.setBackgroundColor(MainActivity.this.getResources().getColor(R.color.bg2));
         Imeu4.setBackgroundColor(MainActivity.this.getResources().getColor(R.color.bg1));
+        showuserCk();
 
+    }
+    private void showuserCk()
+    {
+        tvUsername.setText(NAME);
         final String [] a=new String[]{"username"};
         final String [] b=new String[]{NAME};
         new Thread(){
@@ -313,7 +318,21 @@ public class MainActivity extends AppCompatActivity {
     public void updateuseronClick(View view) {
         Intent intent=new Intent(MainActivity.this,UpdateUserActivity.class);
         intent.putExtra("name",NAME);
-        startActivity(intent) ;
+        //startActivity(intent) ;
+        startActivityForResult(intent,5);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 5:
+                if (resultCode == RESULT_OK) {
+                    NAME= data.getStringExtra("name");
+                    //Log.d("FirstActivity", returnedData);
+                    showuserCk();
+                }
+                break;
+            default:
+        }
     }
 
     public void findButtonClick(View view) {

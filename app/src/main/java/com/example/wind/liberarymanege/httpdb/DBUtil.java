@@ -3,6 +3,7 @@ package com.example.wind.liberarymanege.httpdb;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.view.View;
 
 import com.example.wind.liberarymanege.bean.BType;
 import com.example.wind.liberarymanege.bean.TBook;
@@ -27,25 +28,17 @@ public class DBUtil {
     private BookHttpConnSoap bookHttpConnSoap;
     //登陆验证
     public String[] Login(String[] par1,String[] par2){
-        String [] bool=new String[]{"2","0"};
-        int c=2;
+        //String [] bool=new String[]{"2","0"};
+        //int c=2;
         httpConnSoap=new HttpConnSoap();
         //String[] es=httpConnSoap.HttpGo(par1,par2,"IsMatchUser");
         String[] es=new String[]{""};
         es=httpConnSoap.HttpGo(par1,par2,"IsMatchUser");
-        bool[0]=es[0];
-        bool[1]=es[1];
-        return bool;
-        //String es=se.getProperty(0).toString();
-        /*if(es[0].equals("0"))
-        {
-            //Toast.makeText(LoginActivity.class, "用户名或密码错误！", Toast.LENGTH_SHORT).show();
-            c=0;
-        }else if(es[0].equals("1")){
-            c=1;
+        /*if(es.length>0) {
+            bool[0] = es[0];
+            bool[1] = es[1];
         }*/
-        //cc=Boolean.parseBoolean(es);
-        //return c;
+        return es;
     }
     public int Register(String[] par1,String[] par2){
         int c=3;
@@ -327,5 +320,13 @@ public class DBUtil {
         httpConnSoap=new HttpConnSoap();
         String so=httpConnSoap.HttpGo3(a,b,"IsUpdateUser");
         return so;
+    }
+
+    public Bitmap convertViewToBitmap(View view){
+        view.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+        view.buildDrawingCache();
+        Bitmap bitmap = view.getDrawingCache();
+        return bitmap;
     }
 }

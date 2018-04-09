@@ -19,7 +19,8 @@
                 android:id="@+id/addbookimg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@mipmap/addimg" />
+                android:src="@mipmap/addimg"
+                android:onClick="addbookimage"/>
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
@@ -42,7 +43,9 @@
                     <EditText
                         android:id="@+id/addbookauthor"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:maxLength="19"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="horizontal"
@@ -100,8 +103,10 @@
                         android:id="@+id/addbookcount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="number"
                         android:textSize="24sp"
-                        tools:text="888" />
+                        tools:text="888"
+                        android:maxLength="5"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -126,9 +131,11 @@
                 android:id="@+id/addbookname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textPersonName"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
-                tools:text="天文书" />
+                tools:text="天文书"
+                android:maxLength="19"/>
         </LinearLayout>
 
         <LinearLayout
@@ -141,15 +148,18 @@
                 android:layout_height="wrap_content"
                 android:text="位置:"
                 android:textColor="@color/bg1"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                />
 
             <EditText
                 android:id="@+id/addbooklocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textPostalAddress"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
-                tools:text="天文书" />
+                tools:text="天文书"
+                android:maxLength="49"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -188,6 +198,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/addbookfanhui"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -197,21 +208,23 @@
             android:text="返回" />
 
         <Button
+            android:id="@+id/addbookquxiang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginLeft="10px"
             android:layout_marginRight="10px"
             android:onClick="regbookEnd"
-            android:text="取消" />
+            android:text="重置" />
 
         <Button
+            android:id="@+id/addbookadd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginLeft="10px"
             android:layout_marginRight="10px"
-            android:onClick="geAddbookEnd"
+            android:onClick="geAddbookto"
             android:text="添加" />
     </LinearLayout>
 </LinearLayout>

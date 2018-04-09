@@ -107,12 +107,12 @@ public class LoginActivity extends AppCompatActivity{
         startActivity(intent2) ;
     }
     public  void gomain(Object obj){
-        //int cc= dd[0];//dbUtil.Login(a,b);
-        //loading.setEnabled(true);
-
-        //DialogUIUtils.showMdLoadingHorizontal(this, "加载中...").show();
-        //Toast.makeText(LoginActivity.this, cc, Toast.LENGTH_SHORT).show();
         String [] ss= (String[]) obj;
+        if(ss.length==0)
+        {
+            Toast.makeText(LoginActivity.this,"网络连接错误！", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String cc=ss[0];
         if(cc.equals("0")){
             Intent intent=new Intent(LoginActivity.this,MainActivity.class);
