@@ -12,6 +12,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -31,6 +33,7 @@ import android.widget.Toast;
 import com.example.wind.liberarymanege.R;
 import com.example.wind.liberarymanege.bean.BType;
 import com.example.wind.liberarymanege.httpdb.DBUtil;
+import com.example.wind.liberarymanege.httpdb.RegExpValidatorUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -384,11 +387,97 @@ public class BookAdd extends AppCompatActivity {
         String bcount=tcount.getText().toString();
         String bdesc=tdesc.getText().toString();
         String btypeid=ttypeid;
-        tphoto.setDrawingCacheEnabled(true);
-        Bitmap bitmap=Bitmap.createBitmap(dbU.convertViewToBitmap(tphoto));
-        tphoto.setDrawingCacheEnabled(false);
-        String uphoto=dbU.bitmapToBase64(bitmap);
+
+        String bphoto="";
+        Bitmap bitmap;
+
+        if(tphoto.getDrawable()!=null) {
+            tphoto.setDrawingCacheEnabled(true);
+            bitmap = Bitmap.createBitmap(dbU.convertViewToBitmap(tphoto));
+            bphoto=dbU.bitmapToBase64(bitmap);
+            tphoto.setDrawingCacheEnabled(false);
+        }
+
         String blocation=tlocation.getText().toString();
-        tdesc.setText(btypeid+uphoto);
+
+        //tdesc.setText(btypeid+"\n"+bphoto);
+
+        if(bname.equals("")|| bname==null){
+            Toast.makeText(BookAdd.this,"用户名不能为空！", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        RegExpValidatorUtils regExpValidatorUtils=new RegExpValidatorUtils();
+        if(!regExpValidatorUtils.IsIntNumber(bcount)){
+            Toast.makeText(BookAdd.this,"数量不对", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        final String[] aa=new String[]{"bname","bauthor","bsex","bcount","bdesc","btype","bphoto", "blocation"};
+        final String[] bb=new String[]{bname,bauthor,bsex,bcount,bdesc,btypeid,bphoto,blocation};
+        new Thread(){
+            @Override
+            public void run() {
+                Message msg = new Message();
+                msg.obj =dbU.BookAddBool(aa,bb);
+                msg.what = 2;
+                handler.sendMessage(msg);
+            }
+        }.start();
+    }
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch(msg.what){
+                case 1://setdate(msg.obj);
+                    break;
+                case 2:godate(msg.obj);break;
+                default:
+                    Toast.makeText(BookAdd.this, "程序出错！", Toast.LENGTH_LONG).show();
+                    break;
+            }
+        }
+    };
+
+    private void godate(Object obj){
+        String c= (String) obj;
+        if(c.equals("true")){
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setTitle("提示")
+                    .setMessage("添加成功！")
+                    .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //commit();
+
+                        }
+                    });
+            builder.create().show();
+            setEnB();
+        }
+        else if(c.equals("false")){
+            Toast.makeText(BookAdd.this,"添加失败！", Toast.LENGTH_SHORT).show();
+            setEnB();
+        }
+        else if(c.equals("xob5001")){
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setTitle("提示")
+                    .setMessage("该书名已存在！")
+                    .setPositiveButton("确认",null);
+            builder.create().show();
+            setEnB();
+        }
+        else {
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setTitle("提示")
+                    .setMessage("网络连接错误！")
+                    .setPositiveButton("确认", null);
+            builder.create().show();
+            setEnB();
+        }
+    }
+
+    private void setEnB() {
+
     }
 }

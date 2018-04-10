@@ -130,7 +130,7 @@ public class UpdateUserActivity extends AppCompatActivity {
         Bitmap bitmap=Bitmap.createBitmap(dbUtil.convertViewToBitmap(image));
         image.setDrawingCacheEnabled(false);
         String uphoto=dbUtil.bitmapToBase64(bitmap);
-        if(uname.equals("")){
+        if(uname.equals("")|| uname==null){
             Toast.makeText(UpdateUserActivity.this,"用户名不能为空！", Toast.LENGTH_SHORT).show();
             return;
         }

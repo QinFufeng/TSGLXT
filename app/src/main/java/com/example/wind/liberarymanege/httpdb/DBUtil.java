@@ -329,4 +329,10 @@ public class DBUtil {
         Bitmap bitmap = view.getDrawingCache();
         return bitmap;
     }
+
+    public String BookAddBool(String []a,String [] b) {
+        bookHttpConnSoap=new BookHttpConnSoap();
+        String so=bookHttpConnSoap.HttpGo3(a,b,"IsAddBook");
+        return so;
+    }
 }
