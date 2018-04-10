@@ -67,6 +67,10 @@
         <activity android:name=".activity.BorrowBooks">
 
         </activity>
+
+        <activity android:name=".activity.WeihuBook">
+
+        </activity>
     </application>
 
 </manifest>

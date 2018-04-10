@@ -1,10 +1,12 @@
 package com.example.wind.liberarymanege.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by wind on 2018/3/14.
  */
 
-public class TBook {
+public class TBook implements Serializable {
     private int id;
     private String bname;
     private String bauthor;
@@ -24,6 +26,15 @@ public class TBook {
         this.bauthor = bauthor;
         this.count = count;
         //this.btype = btype;
+        this.bphoto = bphoto;
+    }
+
+    public TBook(int id, String bname, String bauthor, int count,String btype, String bphoto) {
+        this.id = id;
+        this.bname = bname;
+        this.bauthor = bauthor;
+        this.count = count;
+        this.btype = btype;
         this.bphoto = bphoto;
     }
 

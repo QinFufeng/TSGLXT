@@ -64,7 +64,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
-                            android:layout_marginLeft="30dp"
+                            android:layout_marginLeft="15dp"
                             android:duplicateParentState="false"
                             android:text="男" />
 
@@ -72,7 +72,7 @@
                             android:id="@+id/rb_wnam2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="30dp"
+                            android:layout_marginLeft="15dp"
                             android:text="女" />
                     </RadioGroup>
                 </LinearLayout>
@@ -227,6 +227,16 @@
             android:layout_marginRight="10px"
             android:onClick="geAddbookto"
             android:text="添加" />
+        <Button
+            android:visibility="gone"
+            android:id="@+id/addbookxiugai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10px"
+            android:onClick="geAltbookto"
+            android:text="修改" />
     </LinearLayout>
 </LinearLayout>
 </android.support.constraint.ConstraintLayout>

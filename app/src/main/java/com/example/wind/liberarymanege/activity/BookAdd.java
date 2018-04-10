@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import com.example.wind.liberarymanege.R;
 import com.example.wind.liberarymanege.bean.BType;
+import com.example.wind.liberarymanege.bean.TBook;
 import com.example.wind.liberarymanege.httpdb.DBUtil;
 import com.example.wind.liberarymanege.httpdb.RegExpValidatorUtils;
 
@@ -48,15 +49,17 @@ public class BookAdd extends AppCompatActivity {
     private DBUtil dbU;
     private TextView tname,tauthor,tcount,tdesc,tlocation;
     private ImageView tphoto;
-    private RadioButton aman;
+    private RadioButton aman,wman;
     private Spinner addbooksp;
-    private Button bt1,bt2,bt3;
+    private Button bt1,bt2,bt3,bt4;
 
     public static final int TP1=1;
     public static final int TP2=2;
     public static final int SHOWIMAGE=3;
-
-    private String ttypeid;
+    private TBook book;
+    private String ttypeid="";
+    private String [] booktypeIds;
+    private String [] booktypes;
 
     private Uri mCutUri;
 
@@ -64,7 +67,7 @@ public class BookAdd extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookadd);
-
+        dbU=new DBUtil();
         tname= (TextView) findViewById(R.id.addbookname);
         tauthor= (TextView) findViewById(R.id.addbookauthor);
         tcount= (TextView) findViewById(R.id.addbookcount);
@@ -72,29 +75,64 @@ public class BookAdd extends AppCompatActivity {
         tlocation= (TextView) findViewById(R.id.addbooklocation);
         tphoto= (ImageView) findViewById(R.id.addbookimg);
         aman= (RadioButton) findViewById(R.id.rb_man2);
+        wman= (RadioButton) findViewById(R.id.rb_wnam2);
         bt1= (Button) findViewById(R.id.addbookfanhui);
         bt2= (Button) findViewById(R.id.addbookquxiang);
         bt3= (Button) findViewById(R.id.addbookadd);
+        bt4= (Button) findViewById(R.id.addbookxiugai);
 
         addbooksp= (Spinner) findViewById(R.id.addbookspinner);
-        ShowType();
+
+        Intent intent=getIntent();
+        if(intent.getSerializableExtra("book")!=null){
+            bt2.setVisibility(View.GONE);
+            bt3.setVisibility(View.GONE);
+            bt4.setVisibility(View.VISIBLE);
+            book= (TBook) intent.getSerializableExtra("book");
+
+            tname.setText(book.getBname());
+            tauthor.setText(book.getBauthor());
+            if(book.getBsex().equals("男"))
+            {
+                aman.setChecked(true);
+            }else{
+                wman.setChecked(true);
+            }
+            tcount.setText(book.getCount()+"");
+            tdesc.setText(book.getBdesc());
+
+            tphoto.setImageBitmap(dbU.stringToBitmap1(book.getBphoto()));
+            tlocation.setText(book.getLocation());
+            ShowType(book.getBtype());
+        }else {
+            ShowType("");
+        }
     }
 
-    private void ShowType(){
-        dbU=new DBUtil();
-        List<BType> bTypes=dbU.HuoquBTypes();
-        int typecount=bTypes.size();
+    private void ShowType(String btypename){
+        String btn=btypename;
 
+        List<BType> bTypes=dbU.HuoquBTypes();
+
+        int typecount=bTypes.size();
         final String []tids=new String[typecount];
         final String [] tnames=new String[typecount];
         final String [] tdescs=new String[typecount];
+
+        int id_position=0;
         for(int i=0;i<typecount;i++)
         {
             BType bType=bTypes.get(i);
             tids[i]=bType.getTid()+"";
             tnames[i]=bType.getTname();
+            if(btn.equals(bType.getTname()))
+            {
+                id_position=i;
+            }
             tdescs[i]=bType.getTdesc();
         }
+        booktypeIds=tids;
+        booktypes=tnames;
         ArrayAdapter<String> adapter=new ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_spinner_item,
@@ -103,7 +141,9 @@ public class BookAdd extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         addbooksp.setAdapter(adapter);
         addbooksp.setPrompt("请选择书籍类别:");
-        //typesp.setSelection(0,true);
+
+        addbooksp.setSelection(id_position, true);
+
         addbooksp.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
 
             @Override
@@ -386,7 +426,13 @@ public class BookAdd extends AppCompatActivity {
         }
         String bcount=tcount.getText().toString();
         String bdesc=tdesc.getText().toString();
-        String btypeid=ttypeid;
+        String btypeid;
+        if(ttypeid.equals("") || ttypeid==null)
+        {
+            btypeid=booktypeIds[0];
+        }else {
+            btypeid = ttypeid;
+        }
 
         String bphoto="";
         Bitmap bitmap;
@@ -429,7 +475,7 @@ public class BookAdd extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             switch(msg.what){
-                case 1://setdate(msg.obj);
+                case 3:setdate(msg.obj);
                     break;
                 case 2:godate(msg.obj);break;
                 default:
@@ -438,6 +484,47 @@ public class BookAdd extends AppCompatActivity {
             }
         }
     };
+    private void setdate(Object obj){
+        String c= (String) obj;
+        //tdesc.setText(c);
+        if(c.equals("true")){
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setTitle("提示")
+                    .setMessage("修改成功！")
+                    .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //commit();
+                            Intent intent=new Intent();
+                            //intent.putExtra("name",name.getText().toString());
+                            setResult(RESULT_OK,intent);
+                            BookAdd.this.finish();
+                        }
+                    });
+            builder.create().show();
+            setEnB();
+        }
+        else if(c.equals("false")){
+            Toast.makeText(BookAdd.this,"修改失败！", Toast.LENGTH_SHORT).show();
+            setEnB();
+        }
+        else if(c.equals("xob5001")){
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setTitle("提示")
+                    .setMessage("该书名已存在！")
+                    .setPositiveButton("确认",null);
+            builder.create().show();
+            setEnB();
+        }
+        else {
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setTitle("提示")
+                    .setMessage("网络连接错误！")
+                    .setPositiveButton("确认", null);
+            builder.create().show();
+            setEnB();
+        }
+    }
 
     private void godate(Object obj){
         String c= (String) obj;
@@ -479,5 +566,66 @@ public class BookAdd extends AppCompatActivity {
 
     private void setEnB() {
 
+    }
+
+    public void geAltbookto(View view) {
+        String bid=book.getId()+"";
+        String bname=tname.getText().toString();
+        String bauthor=tauthor.getText().toString();
+        String bsex="女";
+        if(aman.isChecked())
+        {
+            bsex="男";
+        }
+        String bcount=tcount.getText().toString();
+        String bdesc=tdesc.getText().toString();
+        String btypeid="";
+        if(ttypeid.equals("") || ttypeid==null)
+        {
+            for(int i=0;i<booktypeIds.length;i++)
+            {
+                if(book.getBtype().equals(booktypes[i]))
+                {
+                    btypeid=booktypeIds[i];
+                }
+            }
+        }else {
+            btypeid = ttypeid;
+        }
+
+        String bphoto="";
+        Bitmap bitmap;
+
+        if(tphoto.getDrawable()!=null) {
+            tphoto.setDrawingCacheEnabled(true);
+            bitmap = Bitmap.createBitmap(dbU.convertViewToBitmap(tphoto));
+            bphoto=dbU.bitmapToBase64(bitmap);
+            tphoto.setDrawingCacheEnabled(false);
+        }
+        String blocation=tlocation.getText().toString();
+
+        //tlocation.setText(btypeid);
+
+        if(bname.equals("")|| bname==null){
+            Toast.makeText(BookAdd.this,"用户名不能为空！", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        RegExpValidatorUtils regExpValidatorUtils=new RegExpValidatorUtils();
+        if(!regExpValidatorUtils.IsIntNumber(bcount)){
+            Toast.makeText(BookAdd.this,"数量不对", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        final String[] aa2=new String[]{"bid","bname","bauthor","bsex","bcount","bdesc","btype","bphoto", "blocation"};
+        final String[] bb2=new String[]{bid,bname,bauthor,bsex,bcount,bdesc,btypeid,bphoto,blocation};
+        new Thread(){
+            @Override
+            public void run() {
+                Message msg = new Message();
+                msg.obj =dbU.BookAltBool(aa2,bb2);
+                msg.what = 3;
+                handler.sendMessage(msg);
+            }
+        }.start();
     }
 }

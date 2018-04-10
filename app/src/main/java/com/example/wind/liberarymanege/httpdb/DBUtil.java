@@ -189,13 +189,7 @@ public class DBUtil {
 
     public List<TBook> HuoquBooks(){
         bookHttpConnSoap=new BookHttpConnSoap();
-
         List<TBook> list=new ArrayList<>();
-
-        //httpConnSoap2=new HttpConnSoap2();
-        //String [] a={"username"};String [] b={"aa"};
-        //String [] a={""};String [] b={""};
-        //SoapObject primitive=httpConnSoap2.HttpGo(a,b,"IsShowUser2");
         SoapObject primitive=bookHttpConnSoap.HttpGo("IsShowBooks");
 
         for(int i=0;i<primitive.getPropertyCount();i++){
@@ -208,6 +202,31 @@ public class DBUtil {
             String bphoto=mstr.getProperty(4).toString();
 
             TBook tbook=new TBook(id,bname,bauthor,bcount,bphoto);
+            //TBook tbook=new TBook(1,"ddd","pppp",10.5,123,"qqqq");
+            list.add(tbook);
+        }
+        return list;
+    }
+
+    public List<TBook> HuoquBooks2(){
+        bookHttpConnSoap=new BookHttpConnSoap();
+        List<TBook> list=new ArrayList<>();
+        SoapObject primitive=bookHttpConnSoap.HttpGo("IsShowBooks2");
+
+        for(int i=0;i<primitive.getPropertyCount();i++){
+            SoapObject mstr= (SoapObject) primitive.getProperty(i);
+
+            int id= Integer.parseInt(mstr.getProperty(0).toString()) ;
+            String bname=mstr.getProperty(1).toString();
+            String bauthor=mstr.getProperty(2).toString();
+            String bsex=mstr.getProperty(3).toString();
+            int bcount= Integer.parseInt(mstr.getProperty(4).toString()) ;
+            String bdesc=mstr.getProperty(5).toString();
+            String btype=mstr.getProperty(6).toString();
+            String bphoto=mstr.getProperty(7).toString();
+            String location=mstr.getProperty(8).toString();
+
+            TBook tbook=new TBook(id,bname,bauthor,bsex,bcount,bdesc,btype,bphoto,location);
             //TBook tbook=new TBook(1,"ddd","pppp",10.5,123,"qqqq");
             list.add(tbook);
         }
@@ -316,6 +335,13 @@ public class DBUtil {
         return so;
     }
 
+    public String BookDelBool(String bid) {
+        bookHttpConnSoap=new BookHttpConnSoap();
+        String [] a={"bid"};String [] b={bid};
+        String so=bookHttpConnSoap.HttpGo3(a,b,"IsDelBook");
+        return so;
+    }
+
     public String Updateuser(String []a,String [] b) {
         httpConnSoap=new HttpConnSoap();
         String so=httpConnSoap.HttpGo3(a,b,"IsUpdateUser");
@@ -333,6 +359,12 @@ public class DBUtil {
     public String BookAddBool(String []a,String [] b) {
         bookHttpConnSoap=new BookHttpConnSoap();
         String so=bookHttpConnSoap.HttpGo3(a,b,"IsAddBook");
+        return so;
+    }
+
+    public String BookAltBool(String []a,String [] b) {
+        bookHttpConnSoap=new BookHttpConnSoap();
+        String so=bookHttpConnSoap.HttpGo3(a,b,"IsAltBook");
         return so;
     }
 }

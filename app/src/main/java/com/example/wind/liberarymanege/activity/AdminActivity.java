@@ -81,7 +81,7 @@ public class AdminActivity extends AppCompatActivity {
                                     startActivity(intent);
                                 }
                                 else {
-                                    Intent intent=new Intent(AdminActivity.this,BookAdd.class);
+                                    Intent intent=new Intent(AdminActivity.this,WeihuBook.class);
                                     startActivity(intent);
                                 }
                             }
