@@ -18,6 +18,7 @@ import java.io.IOException;
  */
 
 public class BookHttpConnSoap {
+    final String b_ip="10.16.96.73";
     //访问网络同时加入这个
     @SuppressLint("NewApi")
     public SoapObject HttpGo( String way){
@@ -28,7 +29,7 @@ public class BookHttpConnSoap {
 
         String namespace="http://tempuri.org/";//namespace
         String soapAction = "http://tempuri.org//"+way+"/";
-        String url = "http://10.16.96.73/WebService2.asmx";
+        String url = "http://"+b_ip+"/WebService2.asmx";
         String methodName=way;//要调用的方法名称
         SoapObject re=new SoapObject(namespace,methodName);
         /*for(int i=0;i<par1.length;i++){
@@ -64,7 +65,7 @@ public class BookHttpConnSoap {
 
         String namespace="http://tempuri.org/";//namespace
         String soapAction = "http://tempuri.org//"+way+"/";
-        String url = "http://10.16.96.73/WebService2.asmx";
+        String url = "http://"+b_ip+"/WebService2.asmx";
         String methodName=way;//要调用的方法名称
         SoapObject re=new SoapObject(namespace,methodName);
         for(int i=0;i<par1.length;i++){
@@ -102,7 +103,7 @@ public class BookHttpConnSoap {
 
         String namespace="http://tempuri.org/";//namespace
         String soapAction = "http://tempuri.org//"+way+"/";
-        String url = "http://10.16.96.73/WebService2.asmx";
+        String url = "http://"+b_ip+"/WebService2.asmx";
         String methodName=way;//要调用的方法名称
         SoapObject re=new SoapObject(namespace,methodName);
         for(int i=0;i<par1.length;i++){

@@ -87,6 +87,14 @@ public class TUser {
         this.photo = photo;
     }
 
+    public TUser(int id, String username, String sex, String phone, String photo) {
+        this.id = id;
+        this.username = username;
+        this.sex = sex;
+        this.phone = phone;
+        this.photo = photo;
+    }
+
     public TUser() {
     }
 

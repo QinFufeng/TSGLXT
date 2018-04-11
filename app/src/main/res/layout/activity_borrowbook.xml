@@ -18,13 +18,14 @@
             android:textSize="24sp" />
 
         <EditText
-            android:id="@+id/borrowbookname"
+            android:id="@+id/borrowbookUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:maxLength="20"
             android:textSize="24sp" />
     </LinearLayout>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -33,24 +34,55 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="借书人:"
+            android:text=" 书   名:"
             android:textSize="24sp" />
 
-        <AutoCompleteTextView
-            android:id="@+id/auto_cp"
+        <EditText
+            android:id="@+id/borrowbookBookname"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:maxLength="20"
+            android:textSize="24sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="借书天数:"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/borrowbookBookday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="20"
+            android:textSize="24sp" />
     </LinearLayout>
     <LinearLayout
         android:gravity="center"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/ttbbtest"
-            android:layout_width="500px"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="添加图书" />
+            android:text="返回"
+            android:onClick="borrowbooksend"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="借出"
+            android:onClick="borrowbookssub"/>
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
@@ -60,7 +92,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="3">
+            >
 
             <ListView
                 android:id="@+id/lv4"
@@ -69,24 +101,6 @@
 
             </ListView>
         </LinearLayout>
-        <LinearLayout
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="返回" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="借出" />
-        </LinearLayout>
-        </LinearLayout>
-
+    </LinearLayout>
 </LinearLayout>
 </android.support.constraint.ConstraintLayout>

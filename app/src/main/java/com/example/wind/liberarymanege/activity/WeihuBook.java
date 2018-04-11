@@ -110,7 +110,6 @@ public class WeihuBook extends AppCompatActivity {
             map.put("Bphoto",bitmap);
             list.add(map);
         }
-
         return list;
     }
 

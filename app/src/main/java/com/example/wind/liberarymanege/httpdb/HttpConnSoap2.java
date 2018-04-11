@@ -17,6 +17,7 @@ import java.io.IOException;
  */
 
 public class HttpConnSoap2 {
+    final String u_ip="10.16.96.73";
     //访问网络同时加入这个
     @SuppressLint("NewApi")
     public SoapObject HttpGo(String[] par1, String[] par2, String way){
@@ -29,7 +30,7 @@ public class HttpConnSoap2 {
 
         String namespace="http://tempuri.org/";//namespace
         String soapAction = "http://tempuri.org//"+way+"/";
-        String url = "http://10.16.96.73/WebService1.asmx";
+        String url = "http://"+u_ip+"/WebService1.asmx";
         String methodName=way;//要调用的方法名称
         SoapObject re=new SoapObject(namespace,methodName);
         for(int i=0;i<par1.length;i++){

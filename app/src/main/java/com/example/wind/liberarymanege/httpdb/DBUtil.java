@@ -26,6 +26,7 @@ public class DBUtil {
     private HttpConnSoap httpConnSoap;
     private HttpConnSoap2 httpConnSoap2;
     private BookHttpConnSoap bookHttpConnSoap;
+
     //登陆验证
     public String[] Login(String[] par1,String[] par2){
         //String [] bool=new String[]{"2","0"};
@@ -365,6 +366,53 @@ public class DBUtil {
     public String BookAltBool(String []a,String [] b) {
         bookHttpConnSoap=new BookHttpConnSoap();
         String so=bookHttpConnSoap.HttpGo3(a,b,"IsAltBook");
+        return so;
+    }
+
+    public List<TUser> Likeuser(String[] a,String[] b)
+    {
+        httpConnSoap=new HttpConnSoap();
+        List<TUser> list=new ArrayList<>();
+        SoapObject so=httpConnSoap.HttpGo2(a,b,"IsLikeUsers");
+
+        for(int i=0;i<so.getPropertyCount();i++) {
+            SoapObject mstr= (SoapObject) so.getProperty(i);
+
+            int uid = Integer.parseInt(mstr.getProperty(0).toString());
+            String uname = mstr.getProperty(1).toString();
+            String usex = mstr.getProperty(2).toString();
+            String uphone = mstr.getProperty(3).toString();
+            String uphoto = mstr.getProperty(4).toString();
+            TUser user = new TUser(uid, uname, usex,uphone,uphoto);
+            list.add(user);
+        }
+        return list;
+    }
+
+    public List<TBook> Likebook(String[] a,String[] b)
+    {
+        bookHttpConnSoap=new BookHttpConnSoap();
+        List<TBook> list=new ArrayList<>();
+        SoapObject so=bookHttpConnSoap.HttpGo2(a,b,"IsLikeBooks");
+
+        for(int i=0;i<so.getPropertyCount();i++) {
+            SoapObject mstr= (SoapObject) so.getProperty(i);
+
+            int bid = Integer.parseInt(mstr.getProperty(0).toString());
+            String bname = mstr.getProperty(1).toString();
+            String bauthor = mstr.getProperty(2).toString();
+            int bcount = Integer.parseInt(mstr.getProperty(3).toString());
+            String btype = mstr.getProperty(4).toString();
+            String bphoto = mstr.getProperty(5).toString();
+            TBook user = new TBook(bid, bname, bauthor,bcount,btype,bphoto);
+            list.add(user);
+        }
+        return list;
+    }
+
+    public String JieBook(String []a,String [] b) {
+        bookHttpConnSoap=new BookHttpConnSoap();
+        String so=bookHttpConnSoap.HttpGo3(a,b,"IsJieBook");
         return so;
     }
 }
