@@ -40,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:background="#c8ff00"
+        android:onClick="goxujieshu"
         android:text="续借管理" />
 
     <Button

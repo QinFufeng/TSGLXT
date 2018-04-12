@@ -102,4 +102,9 @@ public class AdminActivity extends AppCompatActivity {
         Intent intent=new Intent(AdminActivity.this,HuanshuActivity.class);
         startActivity(intent);
     }
+
+    public void goxujieshu(View view) {
+        Intent intent=new Intent(AdminActivity.this,Xujieshu.class);
+        startActivity(intent);
+    }
 }

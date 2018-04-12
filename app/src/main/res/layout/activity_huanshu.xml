@@ -117,10 +117,18 @@
                 android:onClick="huanshuend"/>
 
             <Button
+                android:id="@+id/bt_huanshu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="huanshusub"
                 android:text="还书" />
+            <Button
+                android:id="@+id/bt_xujie"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="xujieshusub"
+                android:text="续借书" />
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"

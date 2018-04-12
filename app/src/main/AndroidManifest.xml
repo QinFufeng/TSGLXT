@@ -75,6 +75,9 @@
         <activity android:name=".activity.HuanshuActivity">
 
         </activity>
+        <activity android:name=".activity.Xujieshu">
+
+        </activity>
     </application>
 
 </manifest>

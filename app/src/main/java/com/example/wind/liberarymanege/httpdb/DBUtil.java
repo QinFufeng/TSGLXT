@@ -419,6 +419,12 @@ public class DBUtil {
         return so;
     }
 
+    public String XujieieBook(String []a,String [] b) {
+        bookHttpConnSoap=new BookHttpConnSoap();
+        String so=bookHttpConnSoap.HttpGo3(a,b,"IsXujieieBook");
+        return so;
+    }
+
     public String HuanBook(String []a,String [] b) {
         bookHttpConnSoap=new BookHttpConnSoap();
         String so=bookHttpConnSoap.HttpGo3(a,b,"IsHuanBook");

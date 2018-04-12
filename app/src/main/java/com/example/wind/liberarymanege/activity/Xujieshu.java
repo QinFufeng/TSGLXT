@@ -11,6 +11,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -22,15 +23,17 @@ import com.example.wind.liberarymanege.R;
 import com.example.wind.liberarymanege.bean.TBook;
 import com.example.wind.liberarymanege.bean.TUser;
 import com.example.wind.liberarymanege.httpdb.DBUtil;
+import com.example.wind.liberarymanege.httpdb.RegExpValidatorUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HuanshuActivity extends AppCompatActivity {
+public class Xujieshu extends AppCompatActivity {
     private EditText uname,countday;
     private TextView bname,jieday,huanday;
+    private Button bt1,bt2;
     private DBUtil dbUtil;
     private String uid="";
     private String bid="";
@@ -45,22 +48,27 @@ public class HuanshuActivity extends AppCompatActivity {
                 case 3:goshowday(msg.obj);break;
                 case 4:godate(msg.obj);break;
                 default:
-                    Toast.makeText(HuanshuActivity.this, "程序出错！", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Xujieshu.this, "程序出错！", Toast.LENGTH_LONG).show();
                     break;
             }
         }
     };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_huanshu);
+
         dbUtil=new DBUtil();
         uname= (EditText) findViewById(R.id.huanshuUsername);
         countday= (EditText) findViewById(R.id.jiedaycount);
         bname= (TextView) findViewById(R.id.huanshuBookname);
         jieday= (TextView) findViewById(R.id.jieday);
         huanday= (TextView) findViewById(R.id.huanday);
+        bt1= (Button) findViewById(R.id.bt_huanshu);
+        bt2= (Button) findViewById(R.id.bt_xujie);
+        countday.setEnabled(true);
+        bt1.setVisibility(View.GONE);
+        bt2.setVisibility(View.VISIBLE);
 
         uname.addTextChangedListener(new TextWatcher() {
             @Override
@@ -142,6 +150,7 @@ public class HuanshuActivity extends AppCompatActivity {
             }
         });
     }
+
     private List<Map<String,Object>> ShowusersgetData(Object obj)
     {
         ArrayList<Map<String,Object>> list=new ArrayList<Map<String, Object>>();
@@ -161,10 +170,6 @@ public class HuanshuActivity extends AppCompatActivity {
             list.add(map);
         }
         return list;
-    }
-
-    public void huanshuend(View view) {
-        HuanshuActivity.this.finish();
     }
 
     private void gobooklist(Object obj) {
@@ -224,11 +229,11 @@ public class HuanshuActivity extends AppCompatActivity {
     private void Shifouchaoqi() {
         if(uid.equals("") || uid==null)
         {
-            Toast.makeText(HuanshuActivity.this,"请选择借书人！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Xujieshu.this,"请选择借书人！", Toast.LENGTH_SHORT).show();
             return;
         }
         if(bid.equals("")|| bid==null){
-            Toast.makeText(HuanshuActivity.this,"请选择要借的图书！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Xujieshu.this,"请选择要借的图书！", Toast.LENGTH_SHORT).show();
             return;
         }
         //String userId=uid;
@@ -254,24 +259,31 @@ public class HuanshuActivity extends AppCompatActivity {
         huanday.setText(days[2]);
     }
 
-    public void huanshusub(View view) {
+    public void xujieshusub(View view) {
+        //jieday.setText("aaaaaaaaaaaaaa");
+        String day=countday.getText().toString();
         if(uid.equals("") || uid==null)
         {
-            Toast.makeText(HuanshuActivity.this,"请选择借书人！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Xujieshu.this,"请选择借书人！", Toast.LENGTH_SHORT).show();
             return;
         }
         if(bid.equals("")|| bid==null){
-            Toast.makeText(HuanshuActivity.this,"请选择要借的图书！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Xujieshu.this,"请选择要借的图书！", Toast.LENGTH_SHORT).show();
             return;
         }
-        final String [] aa={"uid","bid"};
-        final String [] bb={uid,bid};
+        RegExpValidatorUtils regExpValidatorUtils=new RegExpValidatorUtils();
+        if(!regExpValidatorUtils.IsIntNumber(day)){
+            Toast.makeText(Xujieshu.this,"天数错误", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        final String [] aa={"uid","bid","day"};
+        final String [] bb={uid,bid,day};
         new Thread(){
             @Override
             public void run() {
                 Message msg = new Message();
-                msg.obj =dbUtil.HuanBook(aa,bb);
-                msg.what = 4;
+                msg.obj =dbUtil.XujieieBook(aa,bb);
+                msg.what = 3;
                 handler.sendMessage(msg);
             }
         }.start();
@@ -282,22 +294,12 @@ public class HuanshuActivity extends AppCompatActivity {
         if(c.equals("true")){
             AlertDialog.Builder builder=new AlertDialog.Builder(this);
             builder.setTitle("提示")
-                    .setMessage("还书成功！")
+                    .setMessage("续借成功！")
                     .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            final String [] aa=new String[]{"uid"};
-                            final String [] bb=new String[]{uid};
-                            new Thread(){
-                                @Override
-                                public void run() {
-                                    Message msg = new Message();
-                                    msg.obj =dbUtil.Lookhuanbook(aa,bb);
-                                    msg.what = 2;
-                                    handler.sendMessage(msg);
-
-                                }
-                            }.start();
+                            //commit();
+                            Xujieshu.this.finish();
 
                         }
                     });
@@ -306,14 +308,14 @@ public class HuanshuActivity extends AppCompatActivity {
         else if(c.equals("false")){
             AlertDialog.Builder builder=new AlertDialog.Builder(this);
             builder.setTitle("提示")
-                    .setMessage("还书失败！")
+                    .setMessage("续借失败！")
                     .setPositiveButton("确认",null);
             builder.create().show();
         }
         else if(c.equals("xo6001")){
             AlertDialog.Builder builder=new AlertDialog.Builder(this);
             builder.setTitle("提示")
-                    .setMessage("该书无借出库存！")
+                    .setMessage("该书无库存！")
                     .setPositiveButton("确认",null);
             builder.create().show();
         }
@@ -325,5 +327,4 @@ public class HuanshuActivity extends AppCompatActivity {
             builder.create().show();
         }
     }
-
 }
