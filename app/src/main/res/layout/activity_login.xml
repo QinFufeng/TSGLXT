@@ -120,7 +120,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:onClick="reg"
-                    android:text="注册" />
+                    android:text="注册"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -134,7 +135,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="登陆" />
+                    android:text="登陆"
+                    android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
 

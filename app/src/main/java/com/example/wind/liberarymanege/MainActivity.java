@@ -213,50 +213,38 @@ public class MainActivity extends AppCompatActivity {
     }
     private void ShowTypebooks(Object obj){
         typelv2= (ListView) findViewById(R.id.lv2);
-        LinearLayout tou= (LinearLayout) findViewById(R.id.typebookstou);
-        tou.setVisibility(View.VISIBLE);
+
         SimpleAdapter listItemAdapter3=new SimpleAdapter(
                 this,
-                ShowTypebooksgetData(obj),
-                R.layout.typebooks,
-                new String[]{"BName","BAuthor","BCount"},
-                new int[]{R.id.typebooksname,R.id.typebookszuozhe,R.id.typebookspice});
+                ShowbooksgetData(obj),
+                R.layout.weihubooklist,
+                new String[]{"Bname","Bauthor","Bcount","Btype","Bphoto"},
+                new int[]{R.id.bookweihuname,R.id.bookweihuauthor,R.id.bookweihucount,R.id.bookweihutype,R.id.bookweihuimg});
+        listItemAdapter3.setViewBinder(new SimpleAdapter.ViewBinder() {
+            @Override
+            public boolean setViewValue(View view, Object data, String textRepresentation) {
+                if(view instanceof ImageView && data instanceof Bitmap)
+                {
+                    ImageView iv= (ImageView) view;
+                    iv.setImageBitmap((Bitmap) data);
+                    return true;
+                }
+                return false;
+            }
+        });
         typelv2.setAdapter(listItemAdapter3);
         typelv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Map<String,Object> clkmap= (Map<String, Object>) parent.getItemAtPosition(position);
-                //typedesc.setText("id is:"+clkmap.get("BId").toString());
+                //typedesc.setText("id is:"+(int)clkmap.get("Bid"));
                 Intent intype=new Intent(MainActivity.this, ShowBookActivity.class);
-                intype.putExtra("id",clkmap.get("BId").toString());
+                intype.putExtra("id",clkmap.get("Bid").toString());
                 startActivity(intype);
             }
         });
     }
 
-    private List<Map<String,Object>> ShowTypebooksgetData(Object obj)
-    {
-        ArrayList<Map<String,Object>> list=new ArrayList<Map<String, Object>>();
-        Map<String,Object> map=new HashMap<String,Object>();
-        //dbU=new DBUtil();
-        //List<TBook> books=dbU.HuoquTypeBooks(tid);
-        List<TBook> books= (List<TBook>) obj;
-        int conut=books.size();
-        for(int i=0;i<conut;i++){
-            TBook m=books.get(i);
-            //Bitmap bp=dbU.stringToBitmap1(m.getBphoto());
-            if(i!=0){map=new HashMap<String,Object>();}
-            //map.put("BId",m.getId());
-            map.put("BName",m.getBname());
-            map.put("BAuthor",m.getBauthor());
-            map.put("BCount",m.getCount()+"本");
-            map.put("BId",m.getId());
-
-            list.add(map);
-        }
-
-        return list;
-    }
 
     public void findClick(View view) {
         main1.setVisibility(View.GONE);
@@ -357,36 +345,65 @@ public class MainActivity extends AppCompatActivity {
     {
         ListView findlv3 = (ListView) findViewById(R.id.lv3);
         List<TBook> books= (List<TBook>) obj;
-        LinearLayout tou = (LinearLayout) findViewById(R.id.findbookstou);
         LinearLayout tou2 = (LinearLayout) findViewById(R.id.chabudaoshu);
         if(books.size()>0) {
-            tou.setVisibility(View.VISIBLE);
             tou2.setVisibility(View.GONE);
             findlv3.setVisibility(View.VISIBLE);
             SimpleAdapter listItemAdapter4 = new SimpleAdapter(
                     this,
-                    ShowTypebooksgetData(obj),
-                    R.layout.typebooks,
-                    new String[]{"BName", "BAuthor", "BCount"},
-                    new int[]{R.id.typebooksname, R.id.typebookszuozhe, R.id.typebookspice});
+                    ShowbooksgetData(obj),
+                    R.layout.weihubooklist,
+                    new String[]{"Bname","Bauthor","Bcount","Btype","Bphoto"},
+                    new int[]{R.id.bookweihuname,R.id.bookweihuauthor,R.id.bookweihucount,R.id.bookweihutype,R.id.bookweihuimg});
+            listItemAdapter4.setViewBinder(new SimpleAdapter.ViewBinder() {
+                @Override
+                public boolean setViewValue(View view, Object data, String textRepresentation) {
+                    if(view instanceof ImageView && data instanceof Bitmap)
+                    {
+                        ImageView iv= (ImageView) view;
+                        iv.setImageBitmap((Bitmap) data);
+                        return true;
+                    }
+                    return false;
+                }
+            });
             findlv3.setAdapter(listItemAdapter4);
             findlv3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Map<String, Object> clkmap = (Map<String, Object>) parent.getItemAtPosition(position);
-                    //typedesc.setText("id is:"+clkmap.get("BId").toString());
                     Intent intype = new Intent(MainActivity.this, ShowBookActivity.class);
-                    intype.putExtra("id", clkmap.get("BId").toString());
+                    intype.putExtra("id", (int)clkmap.get("Bid")+"");
                     startActivity(intype);
                 }
             });
         }
         else
         {
-            tou.setVisibility(View.GONE);
             tou2.setVisibility(View.VISIBLE);
             findlv3.setVisibility(View.GONE);
         }
+    }
+
+    private List<Map<String,Object>> ShowbooksgetData(Object obj)
+    {
+        ArrayList<Map<String,Object>> list=new ArrayList<Map<String, Object>>();
+        Map<String,Object> map=new HashMap<String,Object>();
+        List<TBook> tBooks= (List<TBook>) obj;
+        int conut=tBooks.size();
+        for(int i=0;i<conut;i++){
+            TBook m=tBooks.get(i);
+            if(i!=0){map=new HashMap<String,Object>();}
+            map.put("Bid",m.getId());
+            map.put("Bname",m.getBname());
+            map.put("Bauthor",m.getBauthor());
+            map.put("Bcount",m.getCount());
+            map.put("Btype",m.getBtype());
+            Bitmap bitmap=dbU.stringToBitmap1(m.getBphoto());
+            map.put("Bphoto",bitmap);
+            list.add(map);
+        }
+        return list;
     }
 
     public void goadmin(View view) {

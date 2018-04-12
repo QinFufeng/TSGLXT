@@ -282,7 +282,6 @@ public class DBUtil {
     public List<TBook> HuoquTypeBooks(String tid) {
         bookHttpConnSoap=new BookHttpConnSoap();
         List<TBook> list=new ArrayList<>();
-
         String [] a={"tid"};String [] b={tid};
         SoapObject so=bookHttpConnSoap.HttpGo2(a,b,"IsTypeBooks");
         for(int i=0;i<so.getPropertyCount();i++) {
@@ -291,8 +290,10 @@ public class DBUtil {
             String bname = mstr.getProperty(1).toString();
             String bauthor = mstr.getProperty(2).toString();
             int bcount = Integer.parseInt(mstr.getProperty(3).toString());
-            TBook book = new TBook(bid, bname, bauthor, bcount);
-            list.add(book);
+            String btype = mstr.getProperty(4).toString();
+            String bphoto = mstr.getProperty(5).toString();
+            TBook user = new TBook(bid, bname, bauthor,bcount,btype,bphoto);
+            list.add(user);
         }
         return list;
     }
@@ -309,8 +310,10 @@ public class DBUtil {
             String bname = mstr.getProperty(1).toString();
             String bauthor = mstr.getProperty(2).toString();
             int bcount = Integer.parseInt(mstr.getProperty(3).toString());
-            TBook book = new TBook(bid, bname, bauthor,  bcount);
-            list.add(book);
+            String btype = mstr.getProperty(4).toString();
+            String bphoto = mstr.getProperty(5).toString();
+            TBook user = new TBook(bid, bname, bauthor,bcount,btype,bphoto);
+            list.add(user);
         }
         return list;
     }
@@ -414,5 +417,44 @@ public class DBUtil {
         bookHttpConnSoap=new BookHttpConnSoap();
         String so=bookHttpConnSoap.HttpGo3(a,b,"IsJieBook");
         return so;
+    }
+
+    public String HuanBook(String []a,String [] b) {
+        bookHttpConnSoap=new BookHttpConnSoap();
+        String so=bookHttpConnSoap.HttpGo3(a,b,"IsHuanBook");
+        return so;
+    }
+
+    public List<TBook> Lookhuanbook(String[] a,String[] b)
+    {
+        bookHttpConnSoap=new BookHttpConnSoap();
+        List<TBook> list=new ArrayList<>();
+        SoapObject so=bookHttpConnSoap.HttpGo2(a,b,"IsUserJieBooks");
+
+        for(int i=0;i<so.getPropertyCount();i++) {
+            SoapObject mstr= (SoapObject) so.getProperty(i);
+
+            int bid = Integer.parseInt(mstr.getProperty(0).toString());
+            String bname = mstr.getProperty(1).toString();
+            String bauthor = mstr.getProperty(2).toString();
+            int bcount = Integer.parseInt(mstr.getProperty(3).toString());
+            String btype = mstr.getProperty(4).toString();
+            String bphoto = mstr.getProperty(5).toString();
+            TBook user = new TBook(bid, bname, bauthor,bcount,btype,bphoto);
+            list.add(user);
+        }
+        return list;
+    }
+
+    public String[] BookJieTime(String[] a,String[] b)
+    {
+        bookHttpConnSoap=new BookHttpConnSoap();
+        SoapObject so=bookHttpConnSoap.HttpGo2(a,b,"IsBookJieTime");
+        String [] cc=new String[so.getPropertyCount()];
+        for(int i=0;i<so.getPropertyCount();i++) {
+            //SoapObject mstr= (SoapObject) so.getProperty(i);
+            cc[i]=so.getProperty(i).toString();
+        }
+        return cc;
     }
 }

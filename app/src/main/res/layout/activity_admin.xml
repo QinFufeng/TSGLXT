@@ -16,7 +16,7 @@
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:background="@color/bg1"
+        android:background="#009dff"
         android:text="图书类别管理" />
 
     <Button
@@ -24,14 +24,14 @@
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:background="@color/bg1"
+        android:background="#009dff"
         android:text="图书管理" />
 
     <Button
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:background="@android:color/holo_blue_bright"
+        android:background="#c8ff00"
         android:onClick="goBorrowBooks"
         android:text="借书管理" />
 
@@ -39,14 +39,15 @@
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:background="@android:color/holo_blue_bright"
+        android:background="#c8ff00"
         android:text="续借管理" />
 
     <Button
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:background="@android:color/holo_blue_bright"
+        android:background="#c8ff00"
+        android:onClick="gohuanshuCk"
         android:text="还书管理" />
 </LinearLayout>
 </android.support.constraint.ConstraintLayout>

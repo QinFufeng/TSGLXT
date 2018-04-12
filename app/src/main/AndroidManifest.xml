@@ -71,6 +71,10 @@
         <activity android:name=".activity.WeihuBook">
 
         </activity>
+
+        <activity android:name=".activity.HuanshuActivity">
+
+        </activity>
     </application>
 
 </manifest>

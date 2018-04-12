@@ -97,4 +97,9 @@ public class AdminActivity extends AppCompatActivity {
         Intent intent=new Intent(AdminActivity.this,BorrowBooks.class);
         startActivity(intent);
     }
+
+    public void gohuanshuCk(View view) {
+        Intent intent=new Intent(AdminActivity.this,HuanshuActivity.class);
+        startActivity(intent);
+    }
 }

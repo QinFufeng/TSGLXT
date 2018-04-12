@@ -21,7 +21,7 @@
             android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFF000"
+
             android:orientation="horizontal">
 
                         <ListView
@@ -38,12 +38,11 @@
                             />-->
         </LinearLayout>
         <LinearLayout
-android:visibility="gone"
             android:id="@+id/type"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            >
+            android:visibility="gone">
             <LinearLayout
                 android:layout_marginTop="20px"
                 android:layout_width="match_parent"
@@ -66,56 +65,15 @@ android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        tools:text="fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" />
+                        tools:text="fffffffffffffffffffffffffffffffffffff" />
                 </ScrollView>
 
             </LinearLayout>
             <LinearLayout
-                android:visibility="invisible"
-                android:id="@+id/typebookstou"
+                android:background="@color/bg1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_weight="3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5sp"
-                >
+                android:layout_height="2px">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="书名" />
-            </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="220sp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5sp"
-                    android:layout_marginRight="5sp"
-                    android:layout_weight="2">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="作者:"
-                        android:textColor="@color/bg2"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="150sp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="数量"
-                        android:textColor="@color/red"
-                        android:textSize="18sp" />
-                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -136,7 +94,7 @@ android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="#00F000">
+            >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -180,52 +138,10 @@ android:visibility="gone"
                 android:orientation="vertical">
 
                 <LinearLayout
-
-                    android:id="@+id/findbookstou"
+                    android:background="@color/bg1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone">
+                    android:layout_height="2px">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5sp"
-                        android:layout_weight="3">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="书名"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="220sp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5sp"
-                        android:layout_marginRight="5sp"
-                        android:layout_weight="2">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="作者:"
-                            android:textColor="@color/bg2"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="150sp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="数量"
-                            android:textColor="@color/red"
-                            android:textSize="18sp" />
-                    </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -361,14 +277,15 @@ android:visibility="gone"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_weight="9">
+
             <TextView
 
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="主界面"
                 android:gravity="center"
                 android:onClick="mainClick"
-                />
+                android:text="主界面"
+                android:textSize="18sp" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/meu2"
@@ -377,14 +294,15 @@ android:visibility="gone"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_weight="9">
+
             <TextView
 
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="图书分类"
                 android:gravity="center"
                 android:onClick="typeClick"
-                />
+                android:text="图书分类"
+                android:textSize="18sp" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/meu3"
@@ -400,7 +318,8 @@ android:visibility="gone"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:onClick="findClick"
-                android:text="搜索图书" />
+                android:text="搜索图书"
+                android:textSize="18sp" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/meu4"
@@ -410,14 +329,15 @@ android:visibility="gone"
             android:orientation="vertical"
             android:layout_weight="9"
             >
+
             <TextView
 
-                android:onClick="userClick"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="个人中心"
                 android:gravity="center"
-                />
+                android:onClick="userClick"
+                android:text="个人中心"
+                android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
     </LinearLayout>
