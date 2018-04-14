@@ -78,6 +78,18 @@
         <activity android:name=".activity.Xujieshu">
 
         </activity>
+
+        <activity android:name=".activity.LookMeJieBook">
+
+        </activity>
+
+        <activity android:name=".activity.SupAdminActivity">
+
+        </activity>
+
+        <activity android:name=".activity.SetAdmin">
+
+        </activity>
     </application>
 
 </manifest>

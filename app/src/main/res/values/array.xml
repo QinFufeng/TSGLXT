@@ -15,6 +15,11 @@
         <item>修改</item>
     </string-array>
 
+    <string-array name="msd">
+        <item>删除用户</item>
+        <item>修改权限</item>
+    </string-array>
+
     <string-array name="setimg">
         <item>拍照上传</item>
         <item>本地图片</item>

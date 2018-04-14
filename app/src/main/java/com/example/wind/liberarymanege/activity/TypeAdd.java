@@ -148,16 +148,11 @@ public class TypeAdd extends AppCompatActivity {
         lading.setVisibility(View.INVISIBLE);
         String bool= (String) obj;
         if(bool.equals("true")) {
-            Toast.makeText(TypeAdd.this, "修改成功！", Toast.LENGTH_LONG).show();
-            /*new Thread(){
-                @Override
-                public void run() {
-                    Message msg = new Message();
-                    //msg.obj=dbUtil.TypeAddBool(tid);
-                    msg.what = 1;
-                    handler.sendMessage(msg);
-                }
-            }.start();*/
+            //Toast.makeText(TypeAdd.this, "修改成功！", Toast.LENGTH_LONG).show();
+            Intent intent=new Intent();
+            //intent.putExtra("name",name.getText().toString());
+            setResult(RESULT_OK,intent);
+            TypeAdd.this.finish();
         }
         else if(bool.equals("false")) {
             Toast.makeText(TypeAdd.this, "修改失败！", Toast.LENGTH_LONG).show();

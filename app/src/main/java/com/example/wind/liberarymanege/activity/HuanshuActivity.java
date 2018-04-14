@@ -212,7 +212,7 @@ public class HuanshuActivity extends AppCompatActivity {
             map.put("Bid",m.getId());
             map.put("Bname",m.getBname());
             map.put("Bauthor",m.getBauthor());
-            map.put("Bcount",m.getCount());
+            map.put("Bcount","1");
             map.put("Btype",m.getBtype());
             Bitmap bitmap=dbUtil.stringToBitmap1(m.getBphoto());
             map.put("Bphoto",bitmap);

@@ -217,7 +217,7 @@ public class Xujieshu extends AppCompatActivity {
             map.put("Bid",m.getId());
             map.put("Bname",m.getBname());
             map.put("Bauthor",m.getBauthor());
-            map.put("Bcount",m.getCount());
+            map.put("Bcount","1");
             map.put("Btype",m.getBtype());
             Bitmap bitmap=dbUtil.stringToBitmap1(m.getBphoto());
             map.put("Bphoto",bitmap);
@@ -283,7 +283,7 @@ public class Xujieshu extends AppCompatActivity {
             public void run() {
                 Message msg = new Message();
                 msg.obj =dbUtil.XujieieBook(aa,bb);
-                msg.what = 3;
+                msg.what = 4;
                 handler.sendMessage(msg);
             }
         }.start();

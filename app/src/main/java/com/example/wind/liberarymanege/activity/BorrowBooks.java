@@ -294,11 +294,17 @@ public class BorrowBooks extends AppCompatActivity {
         else if(c.equals("false")){
             AlertDialog.Builder builder=new AlertDialog.Builder(this);
             builder.setTitle("提示")
-                    .setMessage("添加失败！")
+                    .setMessage("借书失败！")
+                    .setPositiveButton("确认",null);
+            builder.create().show();
+        }else if(c.equals("ox7001")){
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setTitle("提示")
+                    .setMessage("用户未还此书！")
                     .setPositiveButton("确认",null);
             builder.create().show();
         }
-        else if(c.equals("xo6001")){
+        else if(c.equals("ox6001")){
             AlertDialog.Builder builder=new AlertDialog.Builder(this);
             builder.setTitle("提示")
                     .setMessage("该书无库存！")

@@ -346,6 +346,13 @@ public class DBUtil {
         return so;
     }
 
+    public String UserDelBool(String uid) {
+        httpConnSoap=new HttpConnSoap();
+        String [] a={"uid"};String [] b={uid};
+        String so=httpConnSoap.HttpGo3(a,b,"IsDelUser");
+        return so;
+    }
+
     public String Updateuser(String []a,String [] b) {
         httpConnSoap=new HttpConnSoap();
         String so=httpConnSoap.HttpGo3(a,b,"IsUpdateUser");
@@ -446,8 +453,8 @@ public class DBUtil {
             int bcount = Integer.parseInt(mstr.getProperty(3).toString());
             String btype = mstr.getProperty(4).toString();
             String bphoto = mstr.getProperty(5).toString();
-            TBook user = new TBook(bid, bname, bauthor,bcount,btype,bphoto);
-            list.add(user);
+            TBook book = new TBook(bid, bname, bauthor,bcount,btype,bphoto);
+            list.add(book);
         }
         return list;
     }
@@ -462,5 +469,25 @@ public class DBUtil {
             cc[i]=so.getProperty(i).toString();
         }
         return cc;
+    }
+    public TUser LookUser(String[] a,String[] b)
+    {
+        httpConnSoap=new HttpConnSoap();
+        SoapObject mstr=httpConnSoap.HttpGo2(a,b,"IsShowUser3");
+        if(mstr.getPropertyCount()>0) {
+            int uid = Integer.parseInt(mstr.getProperty(0).toString());
+            String uname = mstr.getProperty(1).toString();
+            String mima = mstr.getProperty(2).toString();
+            String usex = mstr.getProperty(3).toString();
+            String uphone = mstr.getProperty(4).toString();
+            String uemail = mstr.getProperty(5).toString();
+            String uphoto = mstr.getProperty(6).toString();
+            int rank = Integer.parseInt(mstr.getProperty(7).toString());
+            TUser user = new TUser(uid,uname,mima,usex,uphone,uemail,uphoto,rank);
+            //TUser user = new TUser(1, "aaa", "www", "s", "1564561", "asdas", "sadsada", 0);
+            //TUser user=new TUser();
+            return user;
+        }
+        return null;
     }
 }

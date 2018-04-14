@@ -118,13 +118,14 @@ public class WeihuType extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 //Toast.makeText(AdminActivity.this, "您选择了"+getResources().getStringArray(R.array.msa)[which], Toast.LENGTH_LONG).show();
                                 if(which==0) {
-                                    Toast.makeText(WeihuType.this, "您选择了"+getResources().getStringArray(R.array.msc)[which], Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(WeihuType.this, "您选择了"+getResources().getStringArray(R.array.msc)[which], Toast.LENGTH_LONG).show();
                                     TypeDel(tid);
                                 }
                                 else {
                                     Intent intent = new Intent(WeihuType.this, TypeAdd.class);
                                     intent.putExtra("type",type);
-                                    startActivity(intent);
+                                    //startActivity(intent);
+                                    startActivityForResult(intent,1);
                                 }
 
                             }
@@ -133,6 +134,27 @@ public class WeihuType extends AppCompatActivity {
                 dialog=b.create();
 
         return dialog;
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Toast.makeText(WeihuType.this, "修改成功！", Toast.LENGTH_LONG).show();
+        switch (requestCode) {
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    new Thread(){
+                        @Override
+                        public void run() {
+                            //Toast.makeText(WeihuType.this, "修改成功！", Toast.LENGTH_LONG).show();
+                            Message msg = new Message();
+                            msg.obj=dbUtil.HuoquBTypes();
+                            msg.what = 1;
+                            handler.sendMessage(msg);
+                        }
+                    }.start();
+                }
+                break;
+            default:
+        }
     }
 
     private void TypeDel(String tid) {

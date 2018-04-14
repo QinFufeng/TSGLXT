@@ -88,6 +88,10 @@ public class RegisterActivity extends AppCompatActivity {
         String sex="男";
         if(rwonman.isChecked()){sex="女";}
         //Toast.makeText(RegisterActivity.this,sex, Toast.LENGTH_SHORT).show();
+        if(name.equals("")){
+            Toast.makeText(RegisterActivity.this,"请输入用户名！", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if(!pwd.equals(rpwd)){
             Toast.makeText(RegisterActivity.this,"密码与确认密码不一致", Toast.LENGTH_SHORT).show();
             return;

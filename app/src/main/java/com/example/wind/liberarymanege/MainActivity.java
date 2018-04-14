@@ -20,7 +20,9 @@ import android.widget.Toast;
 
 import com.example.wind.liberarymanege.activity.AdminActivity;
 import com.example.wind.liberarymanege.activity.LoginActivity;
+import com.example.wind.liberarymanege.activity.LookMeJieBook;
 import com.example.wind.liberarymanege.activity.ShowBookActivity;
+import com.example.wind.liberarymanege.activity.SupAdminActivity;
 import com.example.wind.liberarymanege.activity.UpdatePwdActivity;
 import com.example.wind.liberarymanege.activity.UpdateUserActivity;
 import com.example.wind.liberarymanege.bean.BType;
@@ -412,11 +414,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void gosupadmin(View view) {
+        Intent intent=new Intent(MainActivity.this, SupAdminActivity.class);
+        startActivity(intent);
     }
 
     public void gologin(View view) {
         Intent intent=new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
         MainActivity.this.finish();
+    }
+
+    public void lookmejiebook(View view) {
+        Intent intent=new Intent(MainActivity.this, LookMeJieBook.class);
+        startActivity(intent);
     }
 }

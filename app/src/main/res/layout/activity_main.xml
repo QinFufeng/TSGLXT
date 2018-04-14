@@ -215,9 +215,11 @@ android:visibility="gone"
                         android:orientation="vertical">
 
                         <TextView
+                            android:visibility="invisible"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="借书管理"
+                            android:text="查看借书"
+                            android:onClick="lookmejiebook"
                             android:textSize="30sp" />
 
                         <TextView
@@ -255,7 +257,7 @@ android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:onClick="gosupadmin"
-                            android:text="系统管理"
+                            android:text="用户管理"
                             android:textSize="30sp"
                             android:visibility="gone" />
                     </LinearLayout>
