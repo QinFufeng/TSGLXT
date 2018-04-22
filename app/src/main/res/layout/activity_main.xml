@@ -274,7 +274,7 @@ android:visibility="gone"
 
         <LinearLayout
             android:id="@+id/meu1"
-            android:background="#0044ff"
+            android:background="@color/bg1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"

@@ -18,7 +18,7 @@ import java.io.IOException;
  */
 
 public class HttpConnSoap {
-    final String u_ip="10.16.96.73";
+    final String u_ip="192.168.43.132";
 
     //访问网络同时加入这个
     @SuppressLint("NewApi")
